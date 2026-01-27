@@ -1,384 +1,613 @@
 <!doctype html>
-<html lang="id">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recommedia - Hero</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body>
-    <div class="page">
-      <!-- TOP NAV -->
-      <header class="topbar">
-        <div class="brand">
-          <div class="brand-mark">R</div>
-          <div class="brand-name">Recommedia</div>
-        </div>
-
-        <nav class="nav">
-          <a href="#">Products</a>
-          <a href="#">Solutions</a>
-          <a href="#">Resources</a>
-          <a href="#">Pricing</a>
-        </nav>
-
-        <a class="btn btn-primary btn-glow" href="#">Request Demo</a>
-      </header>
-
-      <!-- HERO -->
-      <main class="hero">
-        <section class="hero-left">
-          <h1>
-            ORKESTRASI KOMUNIKASI<br />
-            DARI IBU KOTA<br />
-            HINGGA PELOSOK NEGERI.
-          </h1>
-
-          <p class="lead">
-            Pantau 3.000+ media lokal (SMSI) dan ribuan unit kerja<br />
-            dalam satu layar.
-          </p>
-          <p class="lead muted">Satu Komando. Satu Data. Satu Narasi.</p>
-
-          <div class="cta">
-            <a class="btn btn-blue" href="#">
-              <span class="play">▶</span>
-              LIHAT DEMO COMMAND CENTER
+  <body class="bg-white text-gray-900">
+    <!-- Header -->
+    <header
+      class="border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-50"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <div class="bg-blue-600 rounded-lg p-1.5">
+              <i data-lucide="radar" class="text-white h-6 w-6"></i>
+            </div>
+            <a href="./index.html">
+              <span class="text-2xl font-semibold text-gray-900"
+                >Recommedia</span
+              >
             </a>
-            <a class="btn btn-outline" href="#">UNDUH CONTOH LAPORAN</a>
           </div>
-        </section>
+          <nav class="hidden md:flex items-center gap-8">
+            <a
+              href="./products.html"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              >Products</a
+            >
+            <a
+              href="./solutions.html"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              >Solutions</a
+            >
+            <a
+              href="#"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              >Resources</a
+            >
+            <a
+              href="#"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              >Company</a
+            >
+          </nav>
+          <button
+            class="bg-blue-600 text-white hover:bg-blue-700 px-6 py-2.5 rounded-lg font-medium transition-all"
+          >
+            Contact Sales
+          </button>
+        </div>
+      </div>
+    </header>
 
-        <section class="hero-right">
-          <div class="globe-wrap">
-            <div class="globe">
-              <div class="glow"></div>
-              <div class="grid"></div>
-              <div class="dots"></div>
-              <div class="lines"></div>
-
-              <div class="tag">
-                <span class="tag-label">Jakarta: 124 Media Aktif</span>
+    <main>
+      <!-- Hero Section -->
+      <section class="bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-20">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+              <div class="inline-block">
+                <span
+                  class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium"
+                >
+                  Media Intelligence Platform
+                </span>
+              </div>
+              <h1
+                class="text-4xl md:text-5xl font-bold leading-tight text-gray-900"
+              >
+                Orkestrasi Komunikasi dari Ibu Kota hingga Pelosok Negeri
+              </h1>
+              <p class="text-xl text-gray-600 leading-relaxed">
+                Pantau 3.000+ media lokal dan ribuan unit kerja dalam satu
+                layar. Satu Komando, Satu Data, Satu Narasi.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-4 pt-">
+                <button
+                  class="text-sm bg-blue-600 text-white hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold transition-all shadow-sm hover:shadow-md"
+                >
+                  Lihat Demo Command Center
+                </button>
+                <button
+                  class="text-sm bg-white border-2 border-gray-300 text-gray-900 hover:border-gray-400 px-8 py-3 rounded-lg font-semibold transition-all"
+                >
+                  Unduh Custom Laporan
+                </button>
+              </div>
+            </div>
+            <div class="relative">
+              <div class="rounded-2xl shadow-xl">
+                <img src="./hero-img.png" alt="hero-img" class="rounded" />
               </div>
             </div>
           </div>
-        </section>
-      </main>
 
-      <!-- TICKER -->
-      <footer class="ticker">
-        <div class="ticker-inner">
-          <span class="pill live">● LIVE ALERT:</span>
-          <span class="msg">Isu “Haji” Trending Positif di Jatim (+15%)</span>
+          <!-- Stats Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            <div
+              class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
+            >
+              <div class="flex items-start gap-4">
+                <div class="bg-green-50 rounded-lg p-3">
+                  <i
+                    data-lucide="trending-up"
+                    class="h-6 w-6 text-green-600"
+                  ></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-green-600 mb-1">
+                    Live Alert
+                  </p>
+                  <p class="text-gray-900 font-medium">
+                    Isu "Haji" Trending Positif di Jatim
+                  </p>
+                  <p class="text-sm text-gray-500 mt-1">+15% engagement</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
+            >
+              <div class="flex items-start gap-4">
+                <div class="bg-red-50 rounded-lg p-3">
+                  <i
+                    data-lucide="alert-triangle"
+                    class="h-6 w-6 text-red-600"
+                  ></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-red-600 mb-1">Warning</p>
+                  <p class="text-gray-900 font-medium">
+                    Sentimen Negatif Terdeteksi
+                  </p>
+                  <p class="text-sm text-gray-500 mt-1">Media Lokal Sulsel</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
+            >
+              <div class="flex items-start gap-4">
+                <div class="bg-blue-50 rounded-lg p-3">
+                  <i data-lucide="award" class="h-6 w-6 text-blue-600"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-blue-600 mb-1">
+                    Top Satker Hari Ini
+                  </p>
+                  <p class="text-gray-900 font-medium">UIN Jakarta</p>
+                  <p class="text-sm text-gray-500 mt-1">3,480 activity score</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <span class="sep">|</span>
+      <!-- Dual Universe Section -->
+      <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center max-w-4xl mx-auto mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Dual-Universe Intelligence
+            </h2>
+            <p class="text-xl text-gray-600 leading-relaxed">
+              Satu-satunya platform yang menyandingkan Data Berita Resmi (Web) &
+              Gejolak Media Sosial secara head-to-head untuk mendeteksi anomali
+              narasi
+            </p>
+          </div>
+          <div class="">
+            <img
+              src="./dual-universe-img.png"
+              alt="dual-universe-img"
+              class="rounded"
+            />
+          </div>
+          <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+            >
+              <div class="flex items-center gap-3 mb-6">
+                <div class="bg-blue-100 rounded-lg p-2">
+                  <i data-lucide="newspaper" class="h-6 w-6 text-blue-600"></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-900">
+                  Media Resmi
+                </h3>
+              </div>
+              <div class="space-y-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                  <div class="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                  <div class="h-3 bg-gray-200 rounded w-5/6"></div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                  <div class="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                  <div class="h-3 bg-gray-200 rounded w-4/6"></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8 shadow-sm"
+            >
+              <div class="flex items-center gap-3 mb-6">
+                <div class="bg-purple-100 rounded-lg p-2">
+                  <i
+                    data-lucide="messages-square"
+                    class="h-6 w-6 text-purple-600"
+                  ></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-900">
+                  Media Sosial
+                </h3>
+              </div>
+              <div class="space-y-4">
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                  <div class="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                  <div class="h-3 bg-gray-200 rounded w-3/4"></div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                  <div class="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                  <div class="h-3 bg-gray-200 rounded w-5/6"></div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </section>
 
-          <span class="pill warn">⚠ WARNING:</span>
-          <span class="msg"
-            >Sentimen Negatif terdeteksi di Media Lokal Sulsel</span
+      <!-- Features Section -->
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Fitur Pengendali Strategis
+            </h2>
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex flex-wrap gap-3 justify-center mb-12">
+            <button
+              class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow-sm"
+            >
+              Performance Leaderboard
+            </button>
+            <button
+              class="bg-white text-gray-700 border border-gray-300 hover:border-gray-400 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Narrative Compliance
+            </button>
+            <button
+              class="bg-white text-gray-700 border border-gray-300 hover:border-gray-400 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Geo-Spatial War Room
+            </button>
+            <button
+              class="bg-white text-gray-700 border border-gray-300 hover:border-gray-400 px-6 py-3 rounded-lg font-semibold transition-all"
+            >
+              Automated Report
+            </button>
+          </div>
+
+          <!-- Leaderboard Table -->
+          <div
+            class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden"
           >
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                  <tr>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600 uppercase tracking-wide"
+                    >
+                      Rank
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600 uppercase tracking-wide"
+                    >
+                      Unit Name
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600 uppercase tracking-wide"
+                    >
+                      Activity Score
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600 uppercase tracking-wide"
+                    >
+                      Engagement Rate
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600 uppercase tracking-wide"
+                    >
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="py-5 px-6">
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-100 text-yellow-700 font-bold text-sm"
+                          >1</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="font-semibold text-gray-900"
+                        >Kanwil Jabar</span
+                      >
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-gray-900 font-semibold">3,480</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-green-600 font-semibold">18.7%</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <i
+                        data-lucide="trophy"
+                        class="h-5 w-5 text-yellow-500"
+                      ></i>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="py-5 px-6">
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold text-sm"
+                          >2</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="font-semibold text-gray-900">UIN Jogja</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-gray-900 font-semibold">3,120</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-green-600 font-semibold">17.4%</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <i data-lucide="medal" class="h-5 w-5 text-gray-400"></i>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="py-5 px-6">
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-100 text-orange-700 font-bold text-sm"
+                          >3</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="font-semibold text-gray-900"
+                        >Kanwil Jatim</span
+                      >
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-gray-900 font-semibold">2,980</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-green-600 font-semibold">16.8%</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <i
+                        data-lucide="award"
+                        class="h-5 w-5 text-orange-400"
+                      ></i>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="py-5 px-6">
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-600 font-bold text-sm"
+                          >4</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="font-semibold text-gray-900"
+                        >Kanwil Jaxi</span
+                      >
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-gray-900 font-semibold">2,770</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-green-600 font-semibold">16.8%</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <i data-lucide="star" class="h-5 w-5 text-gray-300"></i>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="py-5 px-6">
+                      <div class="flex items-center gap-3">
+                        <span
+                          class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-600 font-bold text-sm"
+                          >5</span
+                        >
+                      </div>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="font-semibold text-gray-900"
+                        >Kanwil Sultim</span
+                      >
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-gray-900 font-semibold">2,680</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <span class="text-green-600 font-semibold">16.5%</span>
+                    </td>
+                    <td class="py-5 px-6">
+                      <i data-lucide="star" class="h-5 w-5 text-gray-300"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          <span class="sep">|</span>
+          <!-- Network Section -->
+          <div
+            class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm mt-4"
+          >
+            <p
+              class="text-center text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2"
+            >
+              Powered by Unrivaled Local Network
+            </p>
+            <div class="mx-auto">
+              <img
+                src="./media-img.png"
+                alt="media-img"
+                class="rounded mx-auto"
+              />
+            </div>
+            <!-- <div class="grid grid-cols-3 md:grid-cols-7 gap-8">
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="building" class="h-10 w-10 text-gray-400"></i>
+              </div>
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="landmark" class="h-10 w-10 text-gray-400"></i>
+              </div>
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="school" class="h-10 w-10 text-gray-400"></i>
+              </div>
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="globe" class="h-10 w-10 text-gray-400"></i>
+              </div>
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="network" class="h-10 w-10 text-gray-400"></i>
+              </div>
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="radio" class="h-10 w-10 text-gray-400"></i>
+              </div>
+              <div
+                class="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity"
+              >
+                <i data-lucide="satellite" class="h-10 w-10 text-gray-400"></i>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </section>
 
-          <span class="pill info">■</span>
-          <span class="msg">Top Staker Hari Ini: UIN Jakarta</span>
+      <!-- Footer -->
+      <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12"
+          >
+            <div class="lg:col-span-2">
+              <div class="flex items-center gap-2 mb-4">
+                <div class="bg-blue-600 rounded-lg p-1.5">
+                  <i data-lucide="radar" class="h-5 w-5 text-white"></i>
+                </div>
+                <span class="text-xl font-semibold">Recommedia</span>
+              </div>
+              <p class="text-gray-400 leading-relaxed text-sm">
+                Recommedia adalah platform intelijen media yang memberikan
+                analisa strategis dan menyeluruh untuk pemerintah dan institusi
+                nasional di Indonesia.
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold mb-4">Product</h4>
+              <div class="space-y-3">
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Dashboard</a
+                >
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Leaderboard</a
+                >
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Geo Intel</a
+                >
+              </div>
+            </div>
+
+            <div>
+              <h4 class="font-semibold mb-4">Company</h4>
+              <div class="space-y-3">
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >About Us</a
+                >
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Careers</a
+                >
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Contact</a
+                >
+              </div>
+            </div>
+
+            <div>
+              <h4 class="font-semibold mb-4">Resources</h4>
+              <div class="space-y-3">
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Blog</a
+                >
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Help Center</a
+                >
+                <a
+                  href="#"
+                  class="block text-gray-400 hover:text-white transition-colors text-sm"
+                  >Privacy Policy</a
+                >
+              </div>
+            </div>
+
+            <div>
+              <h4 class="font-semibold mb-4">Contact</h4>
+              <div class="text-gray-400 text-sm space-y-2">
+                <p class="font-medium text-white">PT Recommedia Jaya</p>
+                <p>Jl. Kebon Sirih No. 17A</p>
+                <p>Jakarta Pusat 10340</p>
+                <p class="pt-2">support@recommedia.id</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-800 pt-8">
+            <div
+              class="flex flex-col md:flex-row justify-between items-center gap-4"
+            >
+              <p class="text-gray-400 text-sm">
+                © 2026 Recommedia. All Rights Reserved
+              </p>
+              <div class="flex gap-4">
+                <span
+                  class="inline-flex items-center gap-2 text-gray-400 text-sm"
+                >
+                  <i data-lucide="lock" class="h-4 w-4"></i>
+                  Secure Site
+                </span>
+                <span
+                  class="inline-flex items-center gap-2 text-gray-400 text-sm"
+                >
+                  <i data-lucide="shield-check" class="h-4 w-4"></i>
+                  ISO 27001 Certified
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
+    </main>
 
-      <main class="rm-dual">
-        <div class="rm-dual-head">
-          <div class="rm-spark"></div>
-          <h1>
-            DUAL‑UNIVERSE INTELLIGENCE:<br />LIHAT APA YANG ORANG LAIN LEWATKAN.
-          </h1>
-          <p>
-            Satu‑satunya platform yang menyandingkan Data Berita Resmi (Web)
-            &amp; Gejolak<br />
-            Media Sosial secara head‑to‑head untuk mendeteksi anomali narasi.
-          </p>
-        </div>
-
-        <section class="rm-dual-board rm-glass rm-glow">
-          <div class="rm-dual-divider"></div>
-
-          <!-- LEFT: WEB NEWS -->
-          <div class="rm-panel rm-panel-left">
-            <div class="rm-panel-title">
-              <span class="rm-ico">🌐</span>
-              <span class="rm-title-blue">WEB NEWS SENTIMENT</span>
-              <span class="rm-sub">(SMSI NETWORK)</span>
-            </div>
-
-            <div class="rm-chart">
-              <div class="rm-axis rm-axis-y">
-                <span>Positive</span>
-                <span>Neutral</span>
-                <span>Sentiment</span>
-              </div>
-
-              <div class="rm-plot">
-                <div class="rm-grid"></div>
-                <svg
-                  class="rm-line rm-line-blue"
-                  viewBox="0 0 1000 280"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0,200 C120,190 220,170 320,165 C420,160 520,120 610,110 C690,100 770,125 860,118 C920,114 960,112 1000,110"
-                    fill="none"
-                  />
-                  <circle cx="120" cy="190" r="4"></circle>
-                  <circle cx="320" cy="165" r="4"></circle>
-                  <circle cx="520" cy="120" r="4"></circle>
-                  <circle cx="860" cy="118" r="4"></circle>
-                </svg>
-
-                <div class="rm-xlabels">
-                  <span>12 AM</span><span>6 AM</span><span>12 PM</span
-                  ><span>24 hr</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT: SOCIAL -->
-          <div class="rm-panel rm-panel-right">
-            <div class="rm-panel-title">
-              <span class="rm-ico">📱</span>
-              <span class="rm-title-orange">SOCIAL MEDIA REACTION</span>
-              <span class="rm-sub">(NETIZEN)</span>
-            </div>
-
-            <div class="rm-chart">
-              <div class="rm-plot">
-                <div class="rm-grid"></div>
-                <svg
-                  class="rm-line rm-line-orange"
-                  viewBox="0 0 1000 280"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0,120 C140,120 260,130 360,135 C470,140 560,145 650,150
-                         C720,155 740,170 760,200 C780,255 820,260 840,205
-                         C860,170 910,175 950,178 C980,180 995,180 1000,180"
-                    fill="none"
-                  />
-                  <circle cx="360" cy="135" r="4"></circle>
-                  <circle cx="760" cy="200" r="4"></circle>
-                  <circle cx="840" cy="205" r="4"></circle>
-                  <circle cx="950" cy="178" r="4"></circle>
-                </svg>
-
-                <div class="rm-social-icons">
-                  <span class="rm-soc">𝕏</span>
-                  <span class="rm-soc">♪</span>
-                  <span class="rm-soc">👻</span>
-                </div>
-
-                <div class="rm-xlabels">
-                  <span>12 AM</span><span>12 PM</span><span>6 PM</span
-                  ><span>&nbsp;</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- INSIGHT CARD (CENTER) -->
-          <div class="rm-insight rm-glass rm-glow">
-            <div class="rm-insight-top">
-              <span class="rm-warn">⚠</span>
-              <div>
-                <div class="rm-insight-kicker">INSIGHT:</div>
-                <div class="rm-insight-title">DIVERGENSI TERDETEKSI.</div>
-              </div>
-            </div>
-            <p>
-              Media memberitakan positif, namun terjadi lonjakan sentimen
-              negatif di akar rumput (TikTok) terkait isu implementasi teknis.
-            </p>
-          </div>
-        </section>
-      </main>
-
-      <main class="rm-feature">
-        <h1 class="rm-center-title">FITUR PENGENDALI STRATEGIS</h1>
-
-        <div class="rm-tabs rm-glass">
-          <button class="rm-tab is-active">PERFORMANCE LEADERBOARD</button>
-          <button class="rm-tab">NARRATIVE COMPLIANCE</button>
-          <button class="rm-tab">GEO‑SPATIAL WAR ROOM</button>
-          <button class="rm-tab">AUTOMATED REPORT</button>
-        </div>
-
-        <section class="rm-leader rm-glass rm-glow">
-          <div class="rm-table">
-            <div class="rm-th">Rank</div>
-            <div class="rm-th">Unit Name</div>
-            <div class="rm-th">Activity Score</div>
-            <div class="rm-th">Engagement Rate</div>
-            <div class="rm-th">Badge</div>
-
-            <!-- row 1 -->
-            <div class="rm-td rm-rank">
-              <span class="rm-medal gold">1</span>
-            </div>
-            <div class="rm-td rm-unit">
-              <span class="rm-unit-ico">🏅</span> Kanwil Jabar
-            </div>
-            <div class="rm-td rm-score">
-              3480 <span class="rm-bars">▮▮▮▮</span>
-            </div>
-            <div class="rm-td rm-eng">18.7% <span class="rm-up">↑</span></div>
-            <div class="rm-td rm-badge">
-              <span class="rm-badge gold">①</span> <span class="rm-go">›</span>
-            </div>
-
-            <!-- row 2 -->
-            <div class="rm-td rm-rank">
-              <span class="rm-medal silver">2</span>
-            </div>
-            <div class="rm-td rm-unit">
-              <span class="rm-unit-ico">🎓</span> UIN Jogja
-            </div>
-            <div class="rm-td rm-score">
-              3120 <span class="rm-bars">▮▮▮</span>
-            </div>
-            <div class="rm-td rm-eng">17.4% <span class="rm-up">↑</span></div>
-            <div class="rm-td rm-badge">
-              <span class="rm-badge silver">②</span>
-              <span class="rm-go">›</span>
-            </div>
-
-            <!-- row 3 -->
-            <div class="rm-td rm-rank">
-              <span class="rm-medal bronze">3</span>
-            </div>
-            <div class="rm-td rm-unit">
-              <span class="rm-unit-ico">🏛️</span> Kanwil Jatim
-            </div>
-            <div class="rm-td rm-score">
-              2980 <span class="rm-bars">▮▮▮</span>
-            </div>
-            <div class="rm-td rm-eng">16.8% <span class="rm-up">↑</span></div>
-            <div class="rm-td rm-badge">
-              <span class="rm-badge bronze">③</span>
-              <span class="rm-go">›</span>
-            </div>
-
-            <!-- row 4 -->
-            <div class="rm-td rm-rank">
-              <span class="rm-medal plain">4</span>
-            </div>
-            <div class="rm-td rm-unit">
-              <span class="rm-unit-ico">🧩</span> Jokes Jaki
-            </div>
-            <div class="rm-td rm-score">
-              2770 <span class="rm-bars">▮▮</span>
-            </div>
-            <div class="rm-td rm-eng">16.8% <span class="rm-up">↑</span></div>
-            <div class="rm-td rm-badge">
-              <span class="rm-badge plain">★</span> <span class="rm-go">›</span>
-            </div>
-
-            <!-- row 5 -->
-            <div class="rm-td rm-rank">
-              <span class="rm-medal plain">5</span>
-            </div>
-            <div class="rm-td rm-unit">
-              <span class="rm-unit-ico">📍</span> Kanwil Lutim
-            </div>
-            <div class="rm-td rm-score">
-              2680 <span class="rm-bars">▮▮</span>
-            </div>
-            <div class="rm-td rm-eng">16.5% <span class="rm-up">↑</span></div>
-            <div class="rm-td rm-badge">
-              <span class="rm-badge plain">3</span> <span class="rm-go">›</span>
-            </div>
-
-            <!-- row 6 -->
-            <div class="rm-td rm-rank">
-              <span class="rm-medal plain">6</span>
-            </div>
-            <div class="rm-td rm-unit">
-              <span class="rm-unit-ico">🗺️</span> Jawa Barat
-            </div>
-            <div class="rm-td rm-score">
-              2960 <span class="rm-bars">▮▮▮</span>
-            </div>
-            <div class="rm-td rm-eng">16.3% <span class="rm-up">↑</span></div>
-            <div class="rm-td rm-badge">
-              <span class="rm-badge plain">◇</span> <span class="rm-go">›</span>
-            </div>
-          </div>
-        </section>
-
-        <div class="rm-powered">
-          <div class="rm-powered-line"></div>
-          <div class="rm-powered-text">
-            POWERED BY <b>UNRIVALED LOCAL NETWORK</b>
-          </div>
-          <div class="rm-powered-line"></div>
-        </div>
-
-        <section class="rm-logos rm-glass">
-          <span class="rm-logo">Radar Cirebon</span>
-          <span class="rm-logo">TribunTimur</span>
-          <span class="rm-logo">Harian Jogja</span>
-          <span class="rm-logo">Radar Jogja</span>
-          <span class="rm-logo">Republika</span>
-          <span class="rm-logo">jpn.com</span>
-          <span class="rm-logo">medanbisnis</span>
-          <span class="rm-logo rm-logo-big">SMSI</span>
-        </section>
-
-        <footer class="rm-footer rm-glass">
-          <div class="rm-foot-col">
-            <div class="rm-brand small">
-              <div class="rm-mark">R</div>
-              <div class="rm-name">Recommedia</div>
-            </div>
-            <p class="rm-foot-p">
-              Recommedia adalah platform intelijen media yang memberikan analisa
-              strategis dan menyeluruh untuk pemerintah dan institusi nasional
-              di Indonesia.
-            </p>
-          </div>
-
-          <div class="rm-foot-col">
-            <h4>Product</h4>
-            <a href="#">Dashboard</a>
-            <a href="#">Leaderboard</a>
-            <a href="#">Geo Intel</a>
-          </div>
-
-          <div class="rm-foot-col">
-            <h4>Company</h4>
-            <a href="#">About Us</a>
-            <a href="#">Careers</a>
-            <a href="#">Contact</a>
-          </div>
-
-          <div class="rm-foot-col">
-            <h4>Resources</h4>
-            <a href="#">Blog</a>
-            <a href="#">Help Center</a>
-            <a href="#">Privacy Policy</a>
-          </div>
-
-          <div class="rm-foot-col">
-            <h4>PT Recommedia Jaya</h4>
-            <div class="rm-foot-meta">Jl. Kebon Sirih No. 17A</div>
-            <div class="rm-foot-meta">Jakarta Pusat 10340</div>
-            <div class="rm-foot-meta">support@recommedia.id</div>
-            <div class="rm-foot-badges">
-              <span>🔒 Secure Site</span>
-              <span>ISO 27001 Certified</span>
-            </div>
-          </div>
-
-          <div class="rm-copyright">© 2026 Recommedia. All Rights Reserved</div>
-        </footer>
-      </main>
-    </div>
+    <script>
+      lucide.createIcons();
+    </script>
   </body>
 </html>

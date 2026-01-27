@@ -1,3061 +1,1115 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recommedia - Products</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
-      body {
-        font-family: "Inter", sans-serif;
-      }
-
-      .gradient-bg {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      }
-
-      .product-card {
-        transition: all 0.3s ease;
-        border-left: 4px solid transparent;
-      }
-
-      .product-card:hover {
-        transform: translateY(-5px);
-        border-left-color: #3b82f6;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      }
-
-      .section-divider {
-        height: 1px;
-        background: linear-gradient(
-          to right,
-          transparent,
-          #374151,
-          transparent
-        );
-      }
-
-      .demo-btn {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        transition: all 0.3s ease;
-      }
-
-      .demo-btn:hover {
-        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
-      }
-    </style>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
-      body {
-        font-family: "Inter", sans-serif;
-      }
-
-      .gradient-bg {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      }
-
-      .social-post {
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        border-radius: 12px;
-        border: 1px solid #374151;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .social-post:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      }
-
-      .social-post::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .social-post:hover::before {
-        opacity: 1;
-      }
-
-      .detected-organic {
-        border-left: 4px solid #10b981;
-        background: linear-gradient(
-          135deg,
-          rgba(16, 185, 129, 0.05) 0%,
-          rgba(16, 185, 129, 0.02) 100%
-        );
-      }
-
-      .detected-suspicious {
-        border-left: 4px solid #ef4444;
-        background: linear-gradient(
-          135deg,
-          rgba(239, 68, 68, 0.05) 0%,
-          rgba(239, 68, 68, 0.02) 100%
-        );
-      }
-
-      .username-badge {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        color: white;
-        padding: 2px 10px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-block;
-      }
-
-      .anonymous-badge {
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-        color: white;
-        padding: 2px 10px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-block;
-      }
-
-      .detection-badge {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .keyword-match {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 6px;
-        font-size: 11px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .interaction-stats {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        color: #9ca3af;
-        font-size: 14px;
-      }
-
-      .interaction-icon {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-
-      .blinking-cursor {
-        animation: blink 1s infinite;
-        background-color: #3b82f6;
-        width: 8px;
-        height: 20px;
-        display: inline-block;
-        margin-left: 2px;
-        vertical-align: middle;
-      }
-
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
-      }
-
-      .timestamp {
-        font-size: 11px;
-        color: #6b7280;
-      }
-
-      .keyword-highlight {
-        background-color: rgba(245, 158, 11, 0.2);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: 600;
-        color: #fbbf24;
-      }
-
-      .typing-indicator {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-
-      .typing-dot {
-        width: 8px;
-        height: 8px;
-        background-color: #9ca3af;
-        border-radius: 50%;
-        animation: typing 1.4s infinite;
-      }
-
-      .typing-dot:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-
-      .typing-dot:nth-child(3) {
-        animation-delay: 0.4s;
-      }
-
-      @keyframes typing {
-        0%,
-        60%,
-        100% {
-          transform: translateY(0);
-        }
-        30% {
-          transform: translateY(-5px);
-        }
-      }
-
-      .campaign-card {
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        border-radius: 12px;
-        border: 1px solid #374151;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .campaign-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(to right, #3b82f6, #8b5cf6);
-      }
-
-      .priority-badge {
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .status-badge-compliant {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .status-badge-noncompliant {
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        color: white;
-        padding: 4px 12px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .deadline-countdown {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        color: white;
-        padding: 6px 16px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .unit-card {
-        background: linear-gradient(
-          135deg,
-          rgba(30, 41, 59, 0.5) 0%,
-          rgba(15, 23, 42, 0.5) 100%
-        );
-        border-radius: 10px;
-        border: 1px solid #374151;
-        transition: all 0.3s ease;
-      }
-
-      .unit-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-      }
-
-      .unit-card-compliant {
-        border-left: 4px solid #10b981;
-      }
-
-      .unit-card-noncompliant {
-        border-left: 4px solid #ef4444;
-      }
-
-      .budget-badge {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        color: white;
-        padding: 2px 10px;
-        border-radius: 12px;
-        font-size: 11px;
-        font-weight: 600;
-      }
-
-      .reminder-btn {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        color: white;
-        padding: 6px 16px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
-
-      .reminder-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px -3px rgba(245, 158, 11, 0.3);
-      }
-
-      .progress-tracker {
-        height: 8px;
-        background-color: #374151;
-        border-radius: 4px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .progress-fill {
-        height: 100%;
-        border-radius: 4px;
-        background: linear-gradient(to right, #10b981, #34d399);
-        transition: width 0.5s ease;
-      }
-
-      .pulse-animation {
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.7;
-        }
-      }
-
-      .leaderboard-header {
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-        border-radius: 12px;
-        border: 1px solid #374151;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .leaderboard-header::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(to right, #3b82f6, #8b5cf6);
-      }
-
-      .rank-badge {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 18px;
-      }
-
-      .rank-1 {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        color: white;
-      }
-
-      .rank-2 {
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-        color: white;
-      }
-
-      .rank-3 {
-        background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
-        color: white;
-      }
-
-      .rank-low {
-        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        color: white;
-      }
-
-      .score-card {
-        background: linear-gradient(
-          135deg,
-          rgba(30, 41, 59, 0.5) 0%,
-          rgba(15, 23, 42, 0.5) 100%
-        );
-        border-radius: 10px;
-        border: 1px solid #374151;
-        transition: all 0.3s ease;
-      }
-
-      .score-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      }
-
-      .score-excellent {
-        border-left: 4px solid #10b981;
-      }
-
-      .score-high {
-        border-left: 4px solid #3b82f6;
-      }
-
-      .score-inactive {
-        border-left: 4px solid #ef4444;
-      }
-
-      .grade-badge {
-        padding: 6px 16px;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 14px;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .grade-a-plus {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
-      }
-
-      .grade-excellent {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        color: white;
-      }
-
-      .grade-inactive {
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-        color: white;
-      }
-
-      .performance-percentage {
-        font-size: 12px;
-        padding: 3px 10px;
-        border-radius: 12px;
-        font-weight: 600;
-      }
-
-      .percentage-high {
-        background: rgba(16, 185, 129, 0.2);
-        color: #10b981;
-      }
-
-      .percentage-medium {
-        background: rgba(59, 130, 246, 0.2);
-        color: #3b82f6;
-      }
-
-      .percentage-low {
-        background: rgba(239, 68, 68, 0.2);
-        color: #ef4444;
-      }
-
-      .attention-required {
-        background: linear-gradient(
-          135deg,
-          rgba(239, 68, 68, 0.1) 0%,
-          rgba(239, 68, 68, 0.05) 100%
-        );
-        border: 1px solid #ef4444;
-      }
-
-      .progress-circle {
-        width: 60px;
-        height: 60px;
-        position: relative;
-      }
-
-      .circle-bg {
-        fill: none;
-        stroke: #374151;
-        stroke-width: 3;
-      }
-
-      .circle-progress {
-        fill: none;
-        stroke-width: 3;
-        stroke-linecap: round;
-        transform: rotate(-90deg);
-        transform-origin: 50% 50%;
-        transition: stroke-dashoffset 1s ease;
-      }
-
-      .progress-high {
-        stroke: #10b981;
-      }
-
-      .progress-medium {
-        stroke: #3b82f6;
-      }
-
-      .progress-low {
-        stroke: #ef4444;
-      }
-
-      .sentiment-bar {
-        height: 8px;
-        background-color: #374151;
-        border-radius: 4px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .sentiment-fill {
-        height: 100%;
-        border-radius: 4px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transition: width 1s ease;
-      }
-
-      .sentiment-positive {
-        background: linear-gradient(to right, #10b981, #34d399);
-      }
-
-      .sentiment-neutral {
-        background: linear-gradient(to right, #f59e0b, #fbbf24);
-      }
-
-      .sentiment-negative {
-        background: linear-gradient(to right, #ef4444, #f87171);
-      }
-
-      .pulse-alert {
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.6;
-        }
-      }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body class="dark gradient-bg text-gray-100 min-h-screen">
-    <div class="max-w-6xl mx-auto px-4 py-12">
-      <!-- Header -->
-      <header class="mb-16">
-        <div class="flex justify-between items-center mb-12">
-          <div class="flex items-center">
-            <i data-lucide="radar" class="text-blue-400 h-10 w-10 mr-3"></i>
-            <h1 class="text-3xl font-bold text-white">Recommedia</h1>
+  <body class="bg-white text-gray-900">
+    <!-- Header -->
+    <header
+      class="border-b border-gray-200 bg-white/80 backdrop-blur-md sticky top-0 z-50"
+    >
+      <div class="max-w-5xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <div class="bg-blue-600 rounded-lg p-1.5">
+              <i data-lucide="radar" class="text-white h-6 w-6"></i>
+            </div>
+            <a href="./index.html">
+              <span class="text-2xl font-semibold text-gray-900"
+                >Recommedia</span
+              >
+            </a>
           </div>
-          <nav class="hidden md:flex space-x-8">
+          <nav class="hidden md:flex items-center gap-8">
             <a
-              href="#"
-              class="text-gray-300 hover:text-white transition-colors font-medium"
+              href="./products.html"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >Products</a
             >
             <a
-              href="#"
-              class="text-gray-300 hover:text-white transition-colors font-medium"
+              href="./solutions.html"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >Solutions</a
             >
             <a
               href="#"
-              class="text-gray-300 hover:text-white transition-colors font-medium"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >Resources</a
             >
             <a
               href="#"
-              class="text-gray-300 hover:text-white transition-colors font-medium"
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
               >Company</a
             >
           </nav>
           <button
-            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+            class="bg-blue-600 text-white hover:bg-blue-700 px-6 py-2.5 rounded-lg font-medium transition-all"
           >
             Contact Sales
           </button>
         </div>
-
-        <div class="text-center mb-4">
-          <span
-            class="inline-block px-4 py-1 bg-blue-900 bg-opacity-30 text-blue-300 rounded-full text-sm font-medium mb-6"
-            >OUR OFFERINGS</span
-          >
-          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            Intelligent Media Intelligence Solutions
-          </h2>
-          <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            Advanced platform for strategic and comprehensive media analysis for
-            government and national institutions in Indonesia
-          </p>
-        </div>
-      </header>
-
-      <!-- Main Content -->
-      <div class="w-full">
-        <div class="">
-          <div class="mb-12">
-            <h3 class="text-2xl font-bold text-white mb-8 flex items-center">
-              <i data-lucide="layers" class="mr-3 text-blue-400"></i>
-              Products
-            </h3>
-
-            <div class="grid grid-cols-2 gap-4">
-              <!-- Product 1 -->
-              <div
-                class="product-card bg-gray-800 p-6 rounded-xl border border-gray-700"
-              >
-                <div class="flex items-start">
-                  <div class="mr-4 mt-1">
-                    <div class="bg-blue-900 bg-opacity-30 p-3 rounded-lg">
-                      <i data-lucide="ear" class="h-6 w-6 text-blue-400"></i>
-                    </div>
-                  </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-white mb-2">
-                      Recommedia Intelligence
-                    </h4>
-                    <p class="text-gray-300 mb-3">
-                      Omni-channel listening & SMSI Network
-                    </p>
-                    <p class="text-gray-400 text-sm">
-                      Comprehensive media monitoring across all channels with
-                      integrated Social Media Social Influence (SMSI) network
-                      analysis.
-                    </p>
-                  </div>
-                  <div class="ml-4">
-                    <i
-                      data-licode="chevron-right"
-                      class="h-5 w-5 text-gray-500"
-                    ></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Product 2 -->
-              <div
-                class="product-card bg-gray-800 p-6 rounded-xl border border-gray-700"
-              >
-                <div class="flex items-start">
-                  <div class="mr-4 mt-1">
-                    <div class="bg-purple-900 bg-opacity-30 p-3 rounded-lg">
-                      <i
-                        data-lucide="bar-chart-3"
-                        class="h-6 w-6 text-purple-400"
-                      ></i>
-                    </div>
-                  </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-white mb-2">
-                      Recommedia Orchestrator
-                    </h4>
-                    <p class="text-gray-300 mb-3">
-                      Unit performance & compliance audit
-                    </p>
-                    <p class="text-gray-400 text-sm">
-                      Track and optimize organizational unit performance while
-                      ensuring compliance with regulatory requirements through
-                      automated audits.
-                    </p>
-                  </div>
-                  <div class="ml-4">
-                    <i
-                      data-lucide="chevron-right"
-                      class="h-5 w-5 text-gray-500"
-                    ></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Product 3 -->
-              <div
-                class="product-card bg-gray-800 p-6 rounded-xl border border-gray-700"
-              >
-                <div class="flex items-start">
-                  <div class="mr-4 mt-1">
-                    <div class="bg-green-900 bg-opacity-30 p-3 rounded-lg">
-                      <i data-lucide="map" class="h-6 w-6 text-green-400"></i>
-                    </div>
-                  </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-white mb-2">
-                      Recommedia Command
-                    </h4>
-                    <p class="text-gray-300 mb-3">
-                      Geo-spatial war room & crisis map
-                    </p>
-                    <p class="text-gray-400 text-sm">
-                      Real-time geo-spatial intelligence platform for crisis
-                      management and strategic decision-making in command center
-                      environments.
-                    </p>
-                  </div>
-                  <div class="ml-4">
-                    <i
-                      data-lucide="chevron-right"
-                      class="h-5 w-5 text-gray-500"
-                    ></i>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Product 4 -->
-              <div
-                class="product-card bg-gray-800 p-6 rounded-xl border border-gray-700"
-              >
-                <div class="flex items-start">
-                  <div class="mr-4 mt-1">
-                    <div class="bg-red-900 bg-opacity-30 p-3 rounded-lg">
-                      <i data-lucide="brain" class="h-6 w-6 text-red-400"></i>
-                    </div>
-                  </div>
-                  <div class="flex-1">
-                    <h4 class="text-xl font-bold text-white mb-2">
-                      Recommedia Insight
-                    </h4>
-                    <p class="text-gray-300 mb-3">
-                      Automated reporting & AI analysis
-                    </p>
-                    <p class="text-gray-400 text-sm">
-                      Generate actionable insights with automated reporting and
-                      advanced AI-powered analysis for strategic decision
-                      support.
-                    </p>
-                  </div>
-                  <div class="ml-4">
-                    <i
-                      data-lucide="chevron-right"
-                      class="h-5 w-5 text-gray-500"
-                    ></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
+    </header>
 
-      <section>
-        <div class="text-center mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            PRODUCT SUITE
-          </h1>
-          <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-            Platform strategis untuk performa unggul, deteksi isu, dan analisa
-            geo-spasial.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          <!-- INTELLIGENCE Card -->
-          <div
-            class="product-card bg-gray-800 rounded-xl border border-gray-700 p-8"
+    <main>
+      <!-- Product Overview Section -->
+      <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-6">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center"
           >
-            <div class="mb-8">
-              <div class="flex items-center mb-6">
-                <div class="bg-blue-900 bg-opacity-40 p-3 rounded-lg mr-4">
-                  <i data-lucide="brain" class="h-8 w-8 text-blue-400"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-white">INTELLIGENCE</h2>
-              </div>
-
-              <div class="space-y-4 mb-8">
-                <div class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-5 w-5 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">Omni-Channel Listening</span>
-                </div>
-                <div class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-5 w-5 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">Narrative Compliance</span>
-                </div>
-                <div class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-5 w-5 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">SMSI Grid</span>
-                </div>
-              </div>
-
-              <p class="text-gray-400 mb-8">
-                Comprehensive media intelligence platform with multi-channel
-                monitoring and Social Media Social Influence (SMSI) network
-                analysis for strategic insights.
-              </p>
-            </div>
-
-            <button
-              class="learn-more-btn w-full py-3 text-white font-medium rounded-lg flex items-center justify-center"
+            Products
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              class="flex gap-4 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all"
             >
-              <span>LEARN MORE</span>
-              <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
-            </button>
-          </div>
-
-          <!-- ORCHESTRATOR Card -->
-          <div
-            class="product-card bg-gray-800 rounded-xl border border-gray-700 p-8"
-          >
-            <div class="mb-8">
-              <div class="flex items-center mb-6">
-                <div class="bg-purple-900 bg-opacity-40 p-3 rounded-lg mr-4">
-                  <i
-                    data-lucide="bar-chart-3"
-                    class="h-8 w-8 text-purple-400"
-                  ></i>
-                </div>
-                <h2 class="text-2xl font-bold text-white">ORCHESTRATOR</h2>
+              <div class="bg-blue-100 rounded-lg p-3 flex-shrink-0">
+                <i data-lucide="activity" class="h-6 w-6 text-blue-600"></i>
               </div>
-
-              <div class="mb-8">
-                <h3
-                  class="text-lg font-semibold text-white mb-4 flex items-center"
-                >
-                  <i
-                    data-lucide="award"
-                    class="h-5 w-5 text-yellow-400 mr-2"
-                  ></i>
-                  Top Performing Branches
-                </h3>
-
-                <div class="bg-gray-900 rounded-lg overflow-hidden">
-                  <table class="w-full">
-                    <thead>
-                      <tr class="bg-gray-800">
-                        <th
-                          class="text-left py-3 px-4 text-gray-300 font-medium"
-                        >
-                          Branch
-                        </th>
-                        <th
-                          class="text-right py-3 px-4 text-gray-300 font-medium"
-                        >
-                          Number
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="table-row border-b border-gray-800">
-                        <td class="py-3 px-4 text-gray-300">Kanwil Jabar</td>
-                        <td class="py-3 px-4 text-right font-medium text-white">
-                          3480
-                        </td>
-                      </tr>
-                      <tr class="table-row border-b border-gray-800">
-                        <td class="py-3 px-4 text-gray-300">UIN Jogja</td>
-                        <td class="py-3 px-4 text-right font-medium text-white">
-                          3120
-                        </td>
-                      </tr>
-                      <tr class="table-row border-b border-gray-800">
-                        <td class="py-3 px-4 text-gray-300">Kanwil Jatim</td>
-                        <td class="py-3 px-4 text-right font-medium text-white">
-                          2980
-                        </td>
-                      </tr>
-                      <tr class="table-row border-b border-gray-800">
-                        <td class="py-3 px-4 text-gray-300">Jokes Jaxi</td>
-                        <td class="py-3 px-4 text-right font-medium text-white">
-                          2770
-                        </td>
-                      </tr>
-                      <tr class="table-row border-b border-gray-800">
-                        <td class="py-3 px-4 text-gray-300">Kanwil Lutim</td>
-                        <td class="py-3 px-4 text-right font-medium text-white">
-                          2680
-                        </td>
-                      </tr>
-                      <tr class="table-row">
-                        <td class="py-3 px-4 text-gray-300">Jawa Barat</td>
-                        <td class="py-3 px-4 text-right font-medium text-white">
-                          2560
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              <div class="space-y-4 mb-6">
-                <h4 class="text-lg font-semibold text-white flex items-center">
-                  <i
-                    data-lucide="trending-up"
-                    class="h-5 w-5 text-green-400 mr-2"
-                  ></i>
-                  Performance Leaderboard
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-1">
+                  Recommedia Intelligence
                 </h4>
-
-                <div class="flex items-center">
-                  <i
-                    data-lucide="shield-check"
-                    class="h-5 w-5 text-blue-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">Unit Compliance Audit</span>
-                </div>
-
-                <div class="flex items-center">
-                  <i
-                    data-lucide="star"
-                    class="h-5 w-5 text-yellow-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">Badge Gamification</span>
-                </div>
+                <p class="text-sm text-gray-600">
+                  Omni-channel listening & SMSI network
+                </p>
               </div>
             </div>
-
-            <button
-              class="learn-more-btn w-full py-3 text-white font-medium rounded-lg flex items-center justify-center"
+            <div
+              class="flex gap-4 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all"
             >
-              <span>LEARN MORE</span>
-              <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
-            </button>
-          </div>
-
-          <!-- COMMAND Card -->
-          <div
-            class="product-card bg-gray-800 rounded-xl border border-gray-700 p-8"
-          >
-            <div class="mb-8">
-              <div class="flex items-center mb-6">
-                <div class="bg-red-900 bg-opacity-40 p-3 rounded-lg mr-4">
-                  <i data-lucide="map" class="h-8 w-8 text-red-400"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-white">COMMAND</h2>
+              <div class="bg-purple-100 rounded-lg p-3 flex-shrink-0">
+                <i data-lucide="sliders" class="h-6 w-6 text-purple-600"></i>
               </div>
-
-              <div class="space-y-4 mb-8">
-                <div class="flex items-center">
-                  <i data-lucide="target" class="h-5 w-5 text-red-400 mr-3"></i>
-                  <span class="text-gray-300">Geo-Spatial War Room</span>
-                </div>
-                <div class="flex items-center">
-                  <i
-                    data-lucide="bell"
-                    class="h-5 w-5 text-orange-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">Real-Time Alerts</span>
-                </div>
-                <div class="flex items-center">
-                  <i
-                    data-lucide="thermometer"
-                    class="h-5 w-5 text-yellow-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300">Crisis Heatmap</span>
-                </div>
-              </div>
-
-              <div class="mb-8">
-                <h4 class="text-lg font-semibold text-white mb-4">
-                  Crisis Heatmap Legend
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-1">
+                  Recommedia Orchestrator
                 </h4>
-                <div class="space-y-2">
-                  <div class="flex items-center">
-                    <span class="heatmap-indicator bg-red-500"></span>
-                    <span class="text-gray-300">Critical</span>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="heatmap-indicator bg-orange-500"></span>
-                    <span class="text-gray-300">High Alert</span>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="heatmap-indicator bg-yellow-500"></span>
-                    <span class="text-gray-300">Moderate</span>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="heatmap-indicator bg-green-500"></span>
-                    <span class="text-gray-300">Low Risk</span>
-                  </div>
-                </div>
+                <p class="text-sm text-gray-600">
+                  Unit performance & Compliance audit
+                </p>
               </div>
-
-              <p class="text-gray-400">
-                Geo-spatial intelligence platform for real-time crisis
-                management, providing visual war room capabilities and instant
-                alerts for rapid response.
-              </p>
             </div>
-
-            <button
-              class="learn-more-btn w-full py-3 text-white font-medium rounded-lg flex items-center justify-center"
+            <div
+              class="flex gap-4 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all"
             >
-              <span>LEARN MORE</span>
-              <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
-            </button>
+              <div class="bg-green-100 rounded-lg p-3 flex-shrink-0">
+                <i data-lucide="map" class="h-6 w-6 text-green-600"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-1">
+                  Recommedia Command
+                </h4>
+                <p class="text-sm text-gray-600">
+                  Geo-spatial war room & crisis map
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex gap-4 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all"
+            >
+              <div class="bg-orange-100 rounded-lg p-3 flex-shrink-0">
+                <i
+                  data-lucide="file-bar-chart"
+                  class="h-6 w-6 text-orange-600"
+                ></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900 mb-1">
+                  Recommedia Insight
+                </h4>
+                <p class="text-sm text-gray-600">
+                  Automated reporting & AI analysis
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div class="max-w-7xl mx-auto px-4 py-12">
-        <!-- Hero Section -->
-        <div class="text-center mb-16">
-          <div
-            class="inline-block px-4 py-2 bg-gradient-to-r from-blue-900/40 to-purple-900/40 rounded-full border border-gray-700 mb-6"
-          >
-            <span class="text-blue-300 font-medium"
-              >DUAL-UNIVERSE INTELLIGENCE</span
-            >
-          </div>
-          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
-            LIHAT APA YANG ORANG LAIN LEWATKAN.
-          </h1>
-          <p class="text-xl text-gray-300 max-w-4xl mx-auto">
-            Satu-satunya platform yang menyandingkan Data Berita Resmi (Web) &
-            Gejolak Media Sosial secara head-to-head untuk mendeteksi anomali
-            narasi.
-          </p>
-        </div>
-
-        <!-- Comparison Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <!-- Web News Sentiment -->
-          <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
-            <div class="flex items-center justify-between mb-8">
-              <div>
-                <div class="flex items-center mb-2">
-                  <i data-lucide="globe" class="h-6 w-6 text-blue-400 mr-3"></i>
-                  <h2 class="text-2xl font-bold text-white">
-                    WEB NEWS SENTIMENT
-                  </h2>
-                </div>
-                <p class="text-gray-400 text-sm">(SMISI NETWORK)</p>
-              </div>
-              <div
-                class="bg-blue-900/30 px-4 py-2 rounded-lg border border-blue-800"
-              >
-                <span class="text-blue-300 font-medium">Official Channels</span>
-              </div>
-            </div>
-
-            <!-- Sentiment Labels -->
-            <div class="flex justify-between mb-6">
-              <div class="flex items-center">
-                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                <span class="text-gray-300">Positive</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                <span class="text-gray-300">Neutral</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                <span class="text-gray-300">Negative</span>
-              </div>
-            </div>
-
-            <!-- Chart -->
-            <div class="chart-container">
-              <!-- Grid Lines -->
-              <div class="chart-grid">
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-              </div>
-
-              <!-- Chart Bars -->
-              <div class="chart-bars">
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-positive"
-                    style="height: 70%"
-                  ></div>
-                  <div class="time-label" style="left: 0">12 AM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-neutral"
-                    style="height: 40%"
-                  ></div>
-                  <div class="time-label" style="left: 0">3 AM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-positive"
-                    style="height: 65%"
-                  ></div>
-                  <div class="time-label" style="left: 0">6 AM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-positive"
-                    style="height: 75%"
-                  ></div>
-                  <div class="time-label" style="left: 0">12 PM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-positive"
-                    style="height: 80%"
-                  ></div>
-                  <div class="time-label" style="left: 0">24 hr.</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-neutral"
-                    style="height: 50%"
-                  ></div>
-                  <div class="time-label" style="left: 0">6 PM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-positive"
-                    style="height: 60%"
-                  ></div>
-                  <div class="time-label" style="left: 0">12 AM</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Time Labels -->
-            <div
-              class="flex justify-between mt-12 pt-4 border-t border-gray-700"
-            >
-              <span class="text-gray-500 text-sm">12 AM</span>
-              <span class="text-gray-500 text-sm">6 AM</span>
-              <span class="text-gray-500 text-sm">12 PM</span>
-              <span class="text-gray-500 text-sm">24 hr.</span>
-              <span class="text-gray-500 text-sm">12 AM</span>
-              <span class="text-gray-500 text-sm">12 PM</span>
-              <span class="text-gray-500 text-sm">6 PM</span>
-            </div>
-
-            <!-- Summary -->
-            <div
-              class="mt-8 p-4 bg-green-900/20 rounded-lg border border-green-800"
-            >
-              <div class="flex items-center">
-                <i
-                  data-lucide="trending-up"
-                  class="h-5 w-5 text-green-400 mr-3"
-                ></i>
-                <div>
-                  <h4 class="font-medium text-white">
-                    Dominantly Positive Coverage
-                  </h4>
-                  <p class="text-gray-300 text-sm">
-                    Official news sources show consistently positive sentiment
-                    throughout the day
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Social Media Reaction -->
-          <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
-            <div class="flex items-center justify-between mb-8">
-              <div>
-                <div class="flex items-center mb-2">
-                  <i data-lucide="users" class="h-6 w-6 text-red-400 mr-3"></i>
-                  <h2 class="text-2xl font-bold text-white">
-                    SOCIAL MEDIA REACTION
-                  </h2>
-                </div>
-                <p class="text-gray-400 text-sm">(NETIZEN)</p>
-              </div>
-              <div
-                class="bg-red-900/30 px-4 py-2 rounded-lg border border-red-800"
-              >
-                <span class="text-red-300 font-medium"
-                  >Grassroots Sentiment</span
-                >
-              </div>
-            </div>
-
-            <!-- Sentiment Labels -->
-            <div class="flex justify-between mb-6">
-              <div class="flex items-center">
-                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                <span class="text-gray-300">Positive</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                <span class="text-gray-300">Neutral</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                <span class="text-gray-300">Negative</span>
-              </div>
-            </div>
-
-            <!-- Chart -->
-            <div class="chart-container">
-              <!-- Grid Lines -->
-              <div class="chart-grid">
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-              </div>
-
-              <!-- Chart Bars -->
-              <div class="chart-bars">
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-neutral"
-                    style="height: 45%"
-                  ></div>
-                  <div class="time-label" style="left: 0">12 AM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-neutral"
-                    style="height: 40%"
-                  ></div>
-                  <div class="time-label" style="left: 0">3 AM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-negative"
-                    style="height: 30%"
-                  ></div>
-                  <div class="time-label" style="left: 0">6 AM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-negative pulse-animation"
-                    style="height: 85%"
-                  ></div>
-                  <div class="time-label" style="left: 0">12 PM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-negative"
-                    style="height: 75%"
-                  ></div>
-                  <div class="time-label" style="left: 0">24 hr.</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-negative"
-                    style="height: 65%"
-                  ></div>
-                  <div class="time-label" style="left: 0">6 PM</div>
-                </div>
-                <div class="relative">
-                  <div
-                    class="chart-bar chart-bar-neutral"
-                    style="height: 50%"
-                  ></div>
-                  <div class="time-label" style="left: 0">12 AM</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Time Labels -->
-            <div
-              class="flex justify-between mt-12 pt-4 border-t border-gray-700"
-            >
-              <span class="text-gray-500 text-sm">12 AM</span>
-              <span class="text-gray-500 text-sm">6 AM</span>
-              <span class="text-gray-500 text-sm">12 PM</span>
-              <span class="text-gray-500 text-sm">24 hr.</span>
-              <span class="text-gray-500 text-sm">12 AM</span>
-              <span class="text-gray-500 text-sm">12 PM</span>
-              <span class="text-gray-500 text-sm">6 PM</span>
-            </div>
-
-            <!-- Insight Box -->
-            <div class="divergence-highlight mt-8 p-6 rounded-lg">
-              <div class="flex items-start">
-                <i
-                  data-lucide="alert-triangle"
-                  class="h-6 w-6 text-red-400 mr-4 mt-1"
-                ></i>
-                <div>
-                  <h3 class="text-xl font-bold text-white mb-3">
-                    INSIGHT: DIVERGENSI TERDETEKSI.
-                  </h3>
-                  <p class="text-gray-300">
-                    Media memberitakan positif, namun terjadi lonjakan sentimen
-                    negatif di akar rumput (TikTok) terkait isu implementasi
-                    teknis.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Key Features -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div class="bg-gray-800/50 rounded-xl border border-gray-700 p-6">
-            <div class="flex items-center mb-4">
-              <div class="bg-blue-900/30 p-3 rounded-lg mr-4">
-                <i data-lucide="git-compare" class="h-6 w-6 text-blue-400"></i>
-              </div>
-              <h3 class="text-lg font-bold text-white">
-                Head-to-Head Comparison
-              </h3>
-            </div>
-            <p class="text-gray-300">
-              Direct comparison between official news narratives and grassroots
-              social media sentiment.
+      <!-- Product Suite Section -->
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Product Suite
+            </h2>
+            <p class="text-xl text-gray-600">
+              Platform strategis untuk performa unggul, deteksi isu, dan analisa
+              geo-spasial.
             </p>
           </div>
 
-          <div class="bg-gray-800/50 rounded-xl border border-gray-700 p-6">
-            <div class="flex items-center mb-4">
-              <div class="bg-purple-900/30 p-3 rounded-lg mr-4">
-                <i
-                  data-lucide="alert-octagon"
-                  class="h-6 w-6 text-purple-400"
-                ></i>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Intelligence Card -->
+            <div class="bg-white border border-gray-200 rounded-xl p-8">
+              <h3 class="text-xl font-bold text-gray-900 mb-6">Intelligence</h3>
+              <div class="mb-6 flex items-center justify-center">
+                <img src="./intelligance-img.png" alt="intelligance-img" />
               </div>
-              <h3 class="text-lg font-bold text-white">Anomaly Detection</h3>
-            </div>
-            <p class="text-gray-300">
-              Automated detection of narrative discrepancies between official
-              and social media channels.
-            </p>
-          </div>
-
-          <div class="bg-gray-800/50 rounded-xl border border-gray-700 p-6">
-            <div class="flex items-center mb-4">
-              <div class="bg-green-900/30 p-3 rounded-lg mr-4">
-                <i data-lucide="zap" class="h-6 w-6 text-green-400"></i>
-              </div>
-              <h3 class="text-lg font-bold text-white">Real-Time Monitoring</h3>
-            </div>
-            <p class="text-gray-300">
-              24/7 monitoring of both web news and social media platforms for
-              immediate insights.
-            </p>
-          </div>
-        </div>
-
-        <!-- Explanation -->
-        <div class="bg-gray-800 rounded-xl border border-gray-700 p-8">
-          <h3 class="text-2xl font-bold text-white mb-6">
-            Why Dual-Universe Intelligence Matters
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <div class="flex items-center mb-4">
-                <i data-lucide="eye-off" class="h-5 w-5 text-red-400 mr-3"></i>
-                <h4 class="text-lg font-semibold text-white">
-                  Blind Spots in Traditional Analysis
-                </h4>
-              </div>
-              <p class="text-gray-300">
-                Conventional media monitoring often misses the gap between
-                official narratives and grassroots sentiment. This creates blind
-                spots where emerging issues can escalate unnoticed until they
-                become crises.
-              </p>
-            </div>
-            <div>
-              <div class="flex items-center mb-4">
-                <i data-lucide="target" class="h-5 w-5 text-blue-400 mr-3"></i>
-                <h4 class="text-lg font-semibold text-white">
-                  Strategic Advantage
-                </h4>
-              </div>
-              <p class="text-gray-300">
-                By identifying narrative divergences early, organizations can
-                proactively address concerns, adjust communication strategies,
-                and prevent misinformation from gaining traction.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="max-w-7xl mx-auto px-4 py-12">
-        <!-- Header -->
-        <div class="mb-10">
-          <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center">
-              <i data-lucide="grid-3x3" class="h-8 w-8 text-blue-400 mr-3"></i>
-              <h1 class="text-3xl font-bold text-white">SMSI LOCAL GRID</h1>
-            </div>
-            <div class="flex items-center text-green-400">
-              <div
-                class="blinking-dot w-3 h-3 bg-green-500 rounded-full mr-2"
-              ></div>
-              <span class="text-sm font-medium">LIVE</span>
-            </div>
-          </div>
-          <p class="text-gray-400">
-            Real-time monitoring of local news sources across Indonesia through
-            the Social Media Social Influence (SMSI) network.
-          </p>
-        </div>
-
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-          <!-- Left Column - Featured Local News -->
-          <div class="lg:col-span-2">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <!-- Radar Cirebon Card -->
-              <div
-                class="news-card bg-gray-800 rounded-xl border border-gray-700 p-6"
-              >
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center">
-                    <div class="bg-red-900/30 p-2 rounded-lg mr-3">
-                      <i data-lucide="radio" class="h-5 w-5 text-red-400"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">Radar Cirebon</h3>
-                  </div>
-                  <span class="location-tag">CIREBON</span>
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Omni-channel listening</span>
                 </div>
-                <h4 class="text-xl font-semibold text-white mb-4">
-                  Isu Pupuk Langka Berpotensi Meningkatkan Harga Pangan
-                </h4>
-                <p class="text-gray-300 mb-6">
-                  Kelangkaan pupuk di wilayah Cirebon mulai berdampak pada
-                  produksi pertanian lokal, berpotensi meningkatkan harga pangan
-                  dalam beberapa minggu mendatang.
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Narrative Compliance</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">SMSI Grid</span>
+                </div>
+              </div>
+              <button
+                class="w-full bg-gray-900 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-medium transition-all"
+              >
+                Learn More
+              </button>
+            </div>
+
+            <!-- Orchestrator Card -->
+            <div class="bg-white border border-gray-200 rounded-xl p-8">
+              <h3 class="text-xl font-bold text-gray-900 mb-6">Orchestrator</h3>
+              <div
+                class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 mb-6"
+              >
+                <p class="text-sm font-semibold text-gray-700 mb-4">
+                  Top Performing Branches
                 </p>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center text-gray-400 text-sm">
-                    <i data-lucide="clock" class="h-4 w-4 mr-1"></i>
-                    <span>15 minutes ago</span>
-                  </div>
-                  <button
-                    class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
+                <div class="space-y-2">
+                  <div
+                    class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3"
                   >
-                    <span>Read More</span>
-                    <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Tribun Timur Card -->
-              <div
-                class="news-card bg-gray-800 rounded-xl border border-gray-700 p-6"
-              >
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center">
-                    <div class="bg-blue-900/30 p-2 rounded-lg mr-3">
-                      <i
-                        data-lucide="newspaper"
-                        class="h-5 w-5 text-blue-400"
-                      ></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white">Tribun Timur</h3>
-                  </div>
-                  <div class="flex items-center">
-                    <span
-                      class="bg-green-900/30 text-green-400 text-xs px-2 py-1 rounded"
-                      >Local</span
-                    >
-                    <span class="location-tag ml-2">MAKASSAR</span>
-                  </div>
-                </div>
-                <h4 class="text-xl font-semibold text-white mb-4">
-                  Local News Portal Highlights Regional Issues
-                </h4>
-                <p class="text-gray-300 mb-6">
-                  Portal berita lokal yang mengangkat isu-isu regional penting
-                  di Sulawesi Selatan dengan fokus pada perkembangan ekonomi dan
-                  sosial masyarakat.
-                </p>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center text-gray-400 text-sm">
-                    <i data-lucide="clock" class="h-4 w-4 mr-1"></i>
-                    <span>45 minutes ago</span>
-                  </div>
-                  <button
-                    class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-                  >
-                    <span>Visit Portal</span>
-                    <i data-lucide="external-link" class="h-4 w-4 ml-1"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Map Visualization -->
-            <div class="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-8">
-              <h3 class="text-lg font-bold text-white mb-6 flex items-center">
-                <i data-lucide="map" class="h-5 w-5 text-blue-400 mr-2"></i>
-                SMSI Network Coverage Map
-              </h3>
-
-              <div class="map-grid">
-                <div class="map-location active">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-white font-medium">CIREBON</span>
-                    <i
-                      data-lucide="alert-circle"
-                      class="h-4 w-4 text-yellow-400"
-                    ></i>
-                  </div>
-                  <p class="text-gray-400 text-sm">Pupuk scarcity issue</p>
-                </div>
-
-                <div class="map-location">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-white font-medium">BOGOR</span>
-                    <i
-                      data-lucide="trending-up"
-                      class="h-4 w-4 text-red-400"
-                    ></i>
-                  </div>
-                  <p class="text-gray-400 text-sm">Food price increase</p>
-                </div>
-
-                <div class="map-location">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-white font-medium">MALANG</span>
-                    <i data-lucide="droplets" class="h-4 w-4 text-blue-400"></i>
-                  </div>
-                  <p class="text-gray-400 text-sm">Flooding issue</p>
-                </div>
-
-                <div class="map-location">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-white font-medium">BONE</span>
-                    <i
-                      data-lucide="package"
-                      class="h-4 w-4 text-orange-400"
-                    ></i>
-                  </div>
-                  <p class="text-gray-400 text-sm">Fertilizer stock</p>
-                </div>
-
-                <div class="map-location">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-white font-medium">SIDRAP</span>
-                    <i
-                      data-lucide="hand-heart"
-                      class="h-4 w-4 text-green-400"
-                    ></i>
-                  </div>
-                  <p class="text-gray-400 text-sm">Social aid distribution</p>
-                </div>
-
-                <div class="map-location">
-                  <div class="flex items-center justify-between mb-2">
-                    <span class="text-white font-medium">BATAN</span>
-                    <i data-lucide="flame" class="h-4 w-4 text-red-400"></i>
-                  </div>
-                  <p class="text-gray-400 text-sm">Fire incident</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Additional Radar Cirebon Card -->
-            <div
-              class="news-card news-highlight bg-gray-800 rounded-xl border border-gray-700 p-6"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center">
-                  <div class="bg-red-900/30 p-2 rounded-lg mr-3">
-                    <i data-lucide="radio" class="h-5 w-5 text-red-400"></i>
-                  </div>
-                  <h3 class="text-lg font-bold text-white">Radar Cirebon</h3>
-                </div>
-                <span class="location-tag">CIREBON</span>
-              </div>
-              <h4 class="text-xl font-semibold text-white mb-4">
-                Isu Pupuk Langka Berpotensi Mempengaruhi Produksi Padi
-              </h4>
-              <p class="text-gray-300 mb-6">
-                Update terkini: Dampak kelangkaan pupuk mulai terlihat pada
-                tanaman padi di beberapa kecamatan. Petani meminta intervensi
-                pemerintah untuk stabilisasi pasokan.
-              </p>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center text-gray-400 text-sm">
-                  <i data-lucide="clock" class="h-4 w-4 mr-1"></i>
-                  <span>Just now</span>
-                </div>
-                <div class="flex items-center">
-                  <span
-                    class="text-red-400 text-sm font-medium mr-4 flex items-center"
-                  >
-                    <i data-lucide="trending-up" class="h-4 w-4 mr-1"></i>
-                    <span>Trending</span>
-                  </span>
-                  <button
-                    class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-                  >
-                    <span>Full Report</span>
-                    <i data-lucide="arrow-right" class="h-4 w-4 ml-1"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column - Live Incoming News -->
-          <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
-            <div class="flex items-center justify-between mb-6">
-              <div class="flex items-center">
-                <div class="bg-green-900/30 p-2 rounded-lg mr-3">
-                  <i data-lucide="rss" class="h-5 w-5 text-green-400"></i>
-                </div>
-                <h2 class="text-xl font-bold text-white">
-                  LIVE INCOMING NEWS (SMSI)
-                </h2>
-              </div>
-              <div class="flex items-center">
-                <div
-                  class="blinking-dot w-2 h-2 bg-green-500 rounded-full mr-2"
-                ></div>
-                <span class="text-green-400 text-sm font-medium">ACTIVE</span>
-              </div>
-            </div>
-
-            <div class="space-y-4 mb-8">
-              <!-- News Item 1 -->
-              <div class="incoming-news-item bg-gray-900/50 rounded-lg p-4">
-                <div class="flex items-start">
-                  <div class="bg-red-900/30 p-2 rounded-lg mr-3">
-                    <i
-                      data-lucide="trending-up"
-                      class="h-4 w-4 text-red-400"
-                    ></i>
-                  </div>
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <span class="location-tag text-xs">KAB. BOGOR</span>
-                      <span class="text-gray-500 text-xs ml-3">Economy</span>
-                    </div>
-                    <p class="text-gray-300">
-                      Harga Pangan Mulai Naik Lagi Pasca Kenaikan Harga Pupuk
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- News Item 2 -->
-              <div class="incoming-news-item bg-gray-900/50 rounded-lg p-4">
-                <div class="flex items-start">
-                  <div class="bg-blue-900/30 p-2 rounded-lg mr-3">
-                    <i data-lucide="droplets" class="h-4 w-4 text-blue-400"></i>
-                  </div>
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <span class="location-tag text-xs">KOTA MALANG</span>
-                      <span class="text-gray-500 text-xs ml-3">Disaster</span>
-                    </div>
-                    <p class="text-gray-300">
-                      Banjir Rob, Sejumlah Rumah Warga Terendam di Kawasan
-                      Pesisir
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- News Item 3 -->
-              <div class="incoming-news-item bg-gray-900/50 rounded-lg p-4">
-                <div class="flex items-start">
-                  <div class="bg-orange-900/30 p-2 rounded-lg mr-3">
-                    <i
-                      data-lucide="package"
-                      class="h-4 w-4 text-orange-400"
-                    ></i>
-                  </div>
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <span class="location-tag text-xs">KAB. BONE</span>
-                      <span class="text-gray-500 text-xs ml-3"
-                        >Agriculture</span
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 font-bold text-xs"
+                        >1</span
+                      >
+                      <span class="text-sm font-medium text-gray-900"
+                        >Kanwil Jabar</span
                       >
                     </div>
-                    <p class="text-gray-300">
-                      Stok Pupuk Petroganik Menipis, Petani Kesulitan
-                      Mendapatkan
-                    </p>
+                    <span class="text-sm font-bold text-gray-900">3480</span>
                   </div>
-                </div>
-              </div>
-
-              <!-- News Item 4 -->
-              <div class="incoming-news-item bg-gray-900/50 rounded-lg p-4">
-                <div class="flex items-start">
-                  <div class="bg-green-900/30 p-2 rounded-lg mr-3">
-                    <i
-                      data-lucide="hand-heart"
-                      class="h-4 w-4 text-green-400"
-                    ></i>
-                  </div>
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <span class="location-tag text-xs">KAB. SIDRAP</span>
-                      <span class="text-gray-500 text-xs ml-3">Social</span>
+                  <div
+                    class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-200 text-gray-700 font-bold text-xs"
+                        >2</span
+                      >
+                      <span class="text-sm font-medium text-gray-900"
+                        >UIN Jogja</span
+                      >
                     </div>
-                    <p class="text-gray-300">
-                      Koperasi Wajo Salurkan Bansos di Beberapa Desa Terpencil
-                    </p>
+                    <span class="text-sm font-bold text-gray-900">3210</span>
                   </div>
-                </div>
-              </div>
-
-              <!-- News Item 5 -->
-              <div class="incoming-news-item bg-gray-900/50 rounded-lg p-4">
-                <div class="flex items-start">
-                  <div class="bg-red-900/30 p-2 rounded-lg mr-3">
-                    <i data-lucide="flame" class="h-4 w-4 text-red-400"></i>
-                  </div>
-                  <div>
-                    <div class="flex items-center mb-2">
-                      <span class="location-tag text-xs">KAB. BATAN</span>
-                      <span class="text-gray-500 text-xs ml-3">Incident</span>
+                  <div
+                    class="flex items-center justify-between bg-white border border-gray-200 rounded-lg p-3"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span
+                        class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold text-xs"
+                        >3</span
+                      >
+                      <span class="text-sm font-medium text-gray-900"
+                        >Kanwil Jatim</span
+                      >
                     </div>
-                    <p class="text-gray-300">
-                      Kebakaran Hanguskan 3 Rumah Warga, Diduga Korsleting
-                      Listrik
-                    </p>
+                    <span class="text-sm font-bold text-gray-900">2980</span>
+                  </div>
+                  <div class="text-center text-xs text-gray-500 pt-2">
+                    +3 more units
                   </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Update Info -->
-            <div
-              class="flex items-center justify-between pt-6 border-t border-gray-700"
-            >
-              <div class="flex items-center text-gray-400 text-sm">
-                <i data-lucide="refresh-cw" class="h-4 w-4 mr-2"></i>
-                <span>Updated 2 minutes ago</span>
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Performance Leaderboard</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Unit Compliance Audit</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Badge Gamification</span>
+                </div>
               </div>
               <button
-                class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
+                class="w-full bg-gray-900 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-medium transition-all"
               >
-                <i data-lucide="filter" class="h-4 w-4 mr-1"></i>
-                <span>Filter by Region</span>
+                Learn More
+              </button>
+            </div>
+
+            <!-- Command Card -->
+            <div class="bg-white border border-gray-200 rounded-xl p-8">
+              <h3 class="text-xl font-bold text-gray-900 mb-6">Command</h3>
+              <div class="mb-6 flex items-center justify-center">
+                <img src="./maps.png" alt="maps-1" />
+              </div>
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Geo-spatial War room</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Real-Time Alerts</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i
+                    data-lucide="check"
+                    class="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span class="text-gray-700">Crisis Heatmap</span>
+                </div>
+              </div>
+              <button
+                class="w-full bg-gray-900 text-white hover:bg-gray-800 px-6 py-3 rounded-lg font-medium transition-all"
+              >
+                Learn More
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="mx-auto px-4 py-12">
-        <!-- Header -->
-        <div class="mb-12">
-          <div class="flex items-center mb-6">
-            <div
-              class="bg-gradient-to-r from-purple-900/40 to-blue-900/40 p-3 rounded-xl mr-4"
+      <!-- Dual Universe Intelligence -->
+      <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Dual-Universe Intelligence:<br />
+              Lihat Apa Yang Orang Lain Lewatkan
+            </h2>
+            <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+              Satu-satunya platform yang menyandingkan data berita resmi (web) &
+              Gejolak media sosial secara head-to-head untuk mendeteksi anomali
+              narasi
+            </p>
+          </div>
+          <div class="rounded-2xl p-12">
+            <img src="./dual-universe-img.png" alt="dual-universe-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- SMSI Local Grid -->
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              SMSI Local Grid
+            </h2>
+            <p class="text-xl text-gray-600">
+              Jaringan media lokal terluas di Indonesia
+            </p>
+          </div>
+          <div class="rounded-2xl flex justify-center">
+            <img src="./smsi-img.png" alt="smsi-img" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Dark Post Detective -->
+      <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <span
+              class="inline-block bg-red-100 text-red-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4"
             >
-              <i data-lucide="detective" class="h-10 w-10 text-purple-400"></i>
-            </div>
-            <div>
-              <h1 class="text-3xl font-bold text-white">DARK POST DETECTIVE</h1>
-              <p class="text-gray-400">
-                AI-powered detection of organic vs. orchestrated social media
-                activity
-              </p>
-            </div>
+              Advanced Detection
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Dark Post Detective
+            </h2>
+            <p class="text-xl text-gray-600">
+              Deteksi konten tersembunyi dan percakapan tidak bertag
+            </p>
           </div>
-        </div>
-
-        <!-- Posts Container -->
-        <div class="space-y-6 mb-10">
-          <!-- Post 1: @KanbrX -->
-          <div class="social-post p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center">
+          <div class="space-y-4 max-w-3xl mx-auto">
+            <div
+              class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all"
+            >
+              <div class="flex gap-4">
                 <div
-                  class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3"
+                  class="bg-gray-200 rounded-full h-12 w-12 flex items-center justify-center flex-shrink-0"
                 >
-                  <i data-lucide="user" class="h-5 w-5 text-white"></i>
+                  <i data-lucide="user" class="h-6 w-6 text-gray-500"></i>
                 </div>
-                <div>
-                  <div class="username-badge">@KanbrX</div>
-                  <div class="timestamp mt-1">2 hours ago</div>
-                </div>
-              </div>
-              <div class="text-gray-400 text-sm">
-                <i data-lucide="globe" class="h-4 w-4 inline mr-1"></i>
-                <span>Public</span>
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <p class="text-gray-300 text-lg">
-                X Bisa minta tolong nggak? saya butuh informasi tentang
-                pelayanan di kantor cabang...
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="interaction-stats">
-                <div class="interaction-icon">
-                  <i data-lucide="heart" class="h-4 w-4 text-red-400"></i>
-                  <span>5</span>
-                </div>
-                <div class="interaction-icon">
-                  <i
-                    data-lucide="message-circle"
-                    class="h-4 w-4 text-blue-400"
-                  ></i>
-                  <span>3</span>
-                </div>
-                <div class="interaction-icon">
-                  <i data-lucide="repeat-2" class="h-4 w-4 text-green-400"></i>
-                  <span>2</span>
-                </div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="bg-blue-900/20 px-3 py-1 rounded-lg mr-3">
-                  <span class="text-blue-300 text-sm font-medium"
-                    >Score: 78</span
-                  >
-                </div>
-                <i
-                  data-lucide="chevron-right"
-                  class="h-5 w-5 text-gray-500"
-                ></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Post 2: Anonim62 (DETECTED) -->
-          <div class="social-post detected-organic p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center">
-                <div
-                  class="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full flex items-center justify-center mr-3"
-                >
-                  <i data-lucide="user" class="h-5 w-5 text-gray-300"></i>
-                </div>
-                <div>
-                  <div class="anonymous-badge">Anonim62</div>
-                  <div class="timestamp mt-1">45 minutes ago</div>
-                </div>
-              </div>
-              <div class="detection-badge">
-                <i data-lucide="check-circle" class="h-3 w-3 mr-2"></i>
-                DETECTED : ORGANIC COMPLAINT
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <p class="text-gray-300 text-lg">
-                Sumpah pelayanan di
-                <span class="keyword-highlight">kantor cabang pusat</span> lelet
-                banget hari ini, mana AC panas. Udah nunggu 2 jam masih belum
-                dipanggil juga.
-              </p>
-            </div>
-
-            <div class="mb-6">
-              <div class="keyword-match">
-                <i data-lucide="search" class="h-3 w-3 mr-2"></i>
-                KEYWORD MATCH (UNTAGGED)
-              </div>
-              <div class="text-green-400 text-sm font-medium mt-2">
-                Just Now
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="interaction-stats">
-                <div class="interaction-icon">
-                  <i data-lucide="heart" class="h-4 w-4 text-red-400"></i>
-                  <span>5</span>
-                </div>
-                <div class="interaction-icon">
-                  <i
-                    data-lucide="message-circle"
-                    class="h-4 w-4 text-blue-400"
-                  ></i>
-                  <span>22</span>
-                </div>
-                <div class="interaction-icon">
-                  <i
-                    data-lucide="alert-triangle"
-                    class="h-4 w-4 text-yellow-400"
-                  ></i>
-                  <span>High Priority</span>
-                </div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="bg-green-900/20 px-3 py-1 rounded-lg mr-3">
-                  <span class="text-green-300 text-sm font-medium"
-                    >Confidence: 92%</span
-                  >
-                </div>
-                <i
-                  data-lucide="chevron-right"
-                  class="h-5 w-5 text-gray-500"
-                ></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Post 3: Anonim62 Reply -->
-          <div class="social-post p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center">
-                <div
-                  class="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full flex items-center justify-center mr-3"
-                >
-                  <i data-lucide="user" class="h-5 w-5 text-gray-300"></i>
-                </div>
-                <div>
-                  <div class="anonymous-badge">Anonim62</div>
-                  <div class="timestamp mt-1">30 minutes ago</div>
-                </div>
-              </div>
-              <div class="text-gray-400 text-sm">
-                <i
-                  data-lucide="corner-down-right"
-                  class="h-4 w-4 inline mr-1"
-                ></i>
-                <span>Reply</span>
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <p class="text-gray-300 text-lg">
-                Oh begitu aturan mainnya... jadi harus antri dari pagi ya? Kalo
-                gitu sistemnya perlu diperbaiki dong.
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="interaction-stats">
-                <div class="interaction-icon">
-                  <i data-lucide="heart" class="h-4 w-4 text-red-400"></i>
-                  <span>2</span>
-                </div>
-                <div class="interaction-icon">
-                  <i
-                    data-lucide="message-circle"
-                    class="h-4 w-4 text-blue-400"
-                  ></i>
-                  <span>7</span>
-                </div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="bg-blue-900/20 px-3 py-1 rounded-lg mr-3">
-                  <span class="text-blue-300 text-sm font-medium"
-                    >Score: 65</span
-                  >
-                </div>
-                <i
-                  data-lucide="chevron-right"
-                  class="h-5 w-5 text-gray-500"
-                ></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Post 4: Anonim62 Typing -->
-          <div class="social-post p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center">
-                <div
-                  class="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full flex items-center justify-center mr-3"
-                >
-                  <i data-lucide="user" class="h-5 w-5 text-gray-300"></i>
-                </div>
-                <div>
-                  <div class="anonymous-badge">Anonim62</div>
-                  <div class="timestamp mt-1">Now</div>
-                </div>
-              </div>
-              <div class="typing-indicator">
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <div class="typing-dot"></div>
-                <span class="text-gray-400 text-sm ml-2">typing...</span>
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <div class="text-gray-400 italic">
-                <span>12 mm</span>
-                <span class="blinking-cursor"></span>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-              <div class="interaction-stats">
-                <div class="interaction-icon">
-                  <i data-lucide="eye" class="h-4 w-4 text-gray-400"></i>
-                  <span>Live Monitoring</span>
-                </div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="bg-purple-900/20 px-3 py-1 rounded-lg mr-3">
-                  <span class="text-purple-300 text-sm font-medium"
-                    >Analyzing...</span
-                  >
-                </div>
-                <i
-                  data-lucide="refresh-cw"
-                  class="h-5 w-5 text-gray-500 animate-spin"
-                ></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Analysis Panel -->
-        <div class="bg-gray-800 rounded-xl border border-gray-700 p-8 mb-10">
-          <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-            <i data-lucide="activity" class="h-5 w-5 text-blue-400 mr-2"></i>
-            Detection Analysis
-          </h3>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h4 class="text-lg font-semibold text-white mb-4">
-                Organic Complaint Detection
-              </h4>
-              <p class="text-gray-300 mb-6">
-                AI detected genuine customer frustration based on:
-              </p>
-              <ul class="space-y-3">
-                <li class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-4 w-4 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300"
-                    >Specific location mention (<span class="keyword-highlight"
-                      >kantor cabang pusat</span
-                    >)</span
-                  >
-                </li>
-                <li class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-4 w-4 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300"
-                    >Detailed complaint with concrete issues (AC, waiting
-                    time)</span
-                  >
-                </li>
-                <li class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-4 w-4 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300"
-                    >Natural language patterns without scripted phrases</span
-                  >
-                </li>
-                <li class="flex items-center">
-                  <i
-                    data-lucide="check-circle"
-                    class="h-4 w-4 text-green-400 mr-3"
-                  ></i>
-                  <span class="text-gray-300"
-                    >Follow-up engagement with other users</span
-                  >
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 class="text-lg font-semibold text-white mb-4">
-                Action Recommended
-              </h4>
-              <div class="space-y-4">
-                <div
-                  class="bg-blue-900/20 p-4 rounded-lg border border-blue-800"
-                >
-                  <div class="flex items-center mb-2">
-                    <i
-                      data-lucide="message-square"
-                      class="h-4 w-4 text-blue-400 mr-2"
-                    ></i>
-                    <span class="font-medium text-white"
-                      >Immediate Response</span
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-semibold text-gray-900">
+                      @username_hidden
+                    </h5>
+                    <span
+                      class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full font-medium"
+                      >Untagged</span
                     >
                   </div>
-                  <p class="text-gray-300 text-sm">
-                    Customer service team should address this complaint within 1
-                    hour to prevent escalation.
+                  <p class="text-gray-700 mb-3">
+                    Ini rahasia, jangan kasih tau siapa-siapa ya...
                   </p>
-                </div>
-
-                <div
-                  class="bg-green-900/20 p-4 rounded-lg border border-green-800"
-                >
-                  <div class="flex items-center mb-2">
-                    <i
-                      data-lucide="search"
-                      class="h-4 w-4 text-green-400 mr-2"
-                    ></i>
-                    <span class="font-medium text-white">Pattern Analysis</span>
+                  <div class="flex gap-6 text-gray-500">
+                    <button
+                      class="flex items-center gap-1 hover:text-blue-600 transition-colors"
+                    >
+                      <i data-lucide="message-circle" class="h-4 w-4"></i>
+                      <span class="text-sm">Reply</span>
+                    </button>
+                    <button
+                      class="flex items-center gap-1 hover:text-green-600 transition-colors"
+                    >
+                      <i data-lucide="share-2" class="h-4 w-4"></i>
+                      <span class="text-sm">Forward</span>
+                    </button>
+                    <button
+                      class="flex items-center gap-1 hover:text-red-600 transition-colors"
+                    >
+                      <i data-lucide="heart" class="h-4 w-4"></i>
+                      <span class="text-sm">Like</span>
+                    </button>
                   </div>
-                  <p class="text-gray-300 text-sm">
-                    Check for similar complaints at the same location to
-                    identify systemic issues.
-                  </p>
                 </div>
+              </div>
+            </div>
 
+            <div
+              class="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all"
+            >
+              <div class="flex gap-4">
                 <div
-                  class="bg-purple-900/20 p-4 rounded-lg border border-purple-800"
+                  class="bg-gray-200 rounded-full h-12 w-12 flex items-center justify-center flex-shrink-0"
                 >
-                  <div class="flex items-center mb-2">
-                    <i
-                      data-lucide="bell"
-                      class="h-4 w-4 text-purple-400 mr-2"
-                    ></i>
-                    <span class="font-medium text-white"
-                      >Alert Branch Manager</span
+                  <i data-lucide="user" class="h-6 w-6 text-gray-500"></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-semibold text-gray-900">
+                      @anonymous_critic
+                    </h5>
+                    <span
+                      class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full font-medium"
+                      >Dark Post</span
                     >
                   </div>
-                  <p class="text-gray-300 text-sm">
-                    Notify branch management about service quality issues for
-                    immediate attention.
+                  <p class="text-gray-700 mb-3">
+                    Kenapa kebijakan ini tidak transparan?
                   </p>
+                  <div class="flex gap-6 text-gray-500">
+                    <button
+                      class="flex items-center gap-1 hover:text-blue-600 transition-colors"
+                    >
+                      <i data-lucide="message-circle" class="h-4 w-4"></i>
+                      <span class="text-sm">Reply</span>
+                    </button>
+                    <button
+                      class="flex items-center gap-1 hover:text-green-600 transition-colors"
+                    >
+                      <i data-lucide="share-2" class="h-4 w-4"></i>
+                      <span class="text-sm">Forward</span>
+                    </button>
+                    <button
+                      class="flex items-center gap-1 hover:text-red-600 transition-colors"
+                    >
+                      <i data-lucide="heart" class="h-4 w-4"></i>
+                      <span class="text-sm">Like</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Compliant Units -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-            <i
-              data-lucide="check-circle"
-              class="h-5 w-5 text-green-400 mr-2"
-            ></i>
-            COMPLIANT UNITS
-          </h3>
-
-          <div class="space-y-4">
-            <!-- Unit 1 -->
-            <div class="unit-card unit-card-compliant p-5">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="font-bold text-white">Kanwil Kemenag Jatim</h4>
-                  <div class="budget-badge inline-block mt-2">50b laip</div>
-                </div>
-                <div class="status-badge-compliant">
-                  <i data-lucide="check" class="h-3 w-3 mr-1"></i>
-                  POSTED ✔
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center text-gray-400 text-sm">
-                  <i data-lucide="clock" class="h-3 w-3 mr-2"></i>
-                  <span>2 hours ago</span>
-                </div>
-                <button
-                  class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-                >
-                  <i data-lucide="eye" class="h-4 w-4 mr-1"></i>
-                  View Post
-                </button>
-              </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-card unit-card-compliant p-5">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="font-bold text-white">UIN Sunan Kalijaga</h4>
-                  <div class="budget-badge inline-block mt-2">50b laip</div>
-                </div>
-                <div class="status-badge-compliant">
-                  <i data-lucide="check" class="h-3 w-3 mr-1"></i>
-                  POSTED ✔
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center text-gray-400 text-sm">
-                  <i data-lucide="clock" class="h-3 w-3 mr-2"></i>
-                  <span>5 hours ago</span>
-                </div>
-                <button
-                  class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-                >
-                  <i data-lucide="eye" class="h-4 w-4 mr-1"></i>
-                  View Post
-                </button>
-              </div>
-            </div>
-
-            <!-- Additional Compliant Units -->
-            <div class="unit-card unit-card-compliant p-5">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="font-bold text-white">Kanwil Kemenag Jabar</h4>
-                  <div class="budget-badge inline-block mt-2">45b laip</div>
-                </div>
-                <div class="status-badge-compliant">
-                  <i data-lucide="check" class="h-3 w-3 mr-1"></i>
-                  POSTED ✔
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center text-gray-400 text-sm">
-                  <i data-lucide="clock" class="h-3 w-3 mr-2"></i>
-                  <span>1 day ago</span>
-                </div>
-                <button
-                  class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-                >
-                  <i data-lucide="trending-up" class="h-4 w-4 mr-1"></i>
-                  Analytics
-                </button>
-              </div>
-            </div>
+      <!-- Cross-Platform Live Stream -->
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Cross-Platform Live Stream
+            </h2>
+            <p class="text-xl text-gray-600">
+              Monitor semua channel dalam satu dashboard
+            </p>
           </div>
-        </div>
 
-        <!-- Non-Compliant Units -->
-        <div>
-          <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-            <i data-lucide="x-circle" class="h-5 w-5 text-red-400 mr-2"></i>
-            NON-COMPLIANT UNITS
-          </h3>
-
-          <div class="space-y-4">
-            <!-- Unit 1 -->
-            <div class="unit-card unit-card-noncompliant p-5">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="font-bold text-white">Kanwil Kemenag Papua</h4>
-                  <div class="budget-badge inline-block mt-2">90b laip</div>
-                </div>
-                <div class="status-badge-noncompliant">
-                  <i data-lucide="x" class="h-3 w-3 mr-1"></i>
-                  MISSING ❌
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="text-red-400 text-sm font-medium">
-                  <i
-                    data-lucide="alert-triangle"
-                    class="h-4 w-4 inline mr-1"
-                  ></i>
-                  Overdue by 1 day
-                </div>
-                <button class="reminder-btn flex items-center">
-                  <i data-lucide="send" class="h-3 w-3 mr-2"></i>
-                  SEND REMINDER
-                </button>
-              </div>
+          <div class="bg-white border border-gray-200 rounded-2xl p-8">
+            <!-- Tabs -->
+            <div class="flex gap-3 mb-8 border-b border-gray-200 pb-4">
+              <button
+                class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium"
+              >
+                All Sources
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-700 hover:border-gray-400 px-6 py-2 rounded-lg font-medium transition-all"
+              >
+                News Only
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-700 hover:border-gray-400 px-6 py-2 rounded-lg font-medium transition-all"
+              >
+                Social Only
+              </button>
             </div>
 
-            <!-- Unit 2 -->
-            <div class="unit-card unit-card-noncompliant p-5">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="font-bold text-white">IAIN Sorong</h4>
-                  <div class="budget-badge inline-block mt-2">500b laip</div>
-                </div>
-                <div class="status-badge-noncompliant">
-                  <i data-lucide="x" class="h-3 w-3 mr-1"></i>
-                  MISSING ❌
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="text-red-400 text-sm font-medium">
-                  <i
-                    data-lucide="alert-triangle"
-                    class="h-4 w-4 inline mr-1"
-                  ></i>
-                  Overdue by 2 days
-                </div>
-                <button class="reminder-btn flex items-center">
-                  <i data-lucide="send" class="h-3 w-3 mr-2"></i>
-                  SEND REMINDER
-                </button>
-              </div>
-            </div>
-
-            <!-- Additional Non-Compliant Unit -->
-            <div class="unit-card unit-card-noncompliant p-5 opacity-70">
-              <div class="flex items-center justify-between mb-4">
-                <div>
-                  <h4 class="font-bold text-white">Kanwil Kemenag Maluku</h4>
-                  <div class="budget-badge inline-block mt-2">35b laip</div>
-                </div>
-                <div class="status-badge-noncompliant">
-                  <i data-lucide="clock" class="h-3 w-3 mr-1"></i>
-                  PENDING
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="text-yellow-400 text-sm font-medium">
-                  <i data-lucide="clock" class="h-4 w-4 inline mr-1"></i>
-                  Due tomorrow
-                </div>
-                <button
-                  class="bg-gray-700 text-gray-300 px-4 py-2 rounded text-sm font-medium"
-                >
-                  <i data-lucide="bell" class="h-3 w-3 inline mr-1"></i>
-                  Schedule Alert
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="max-w-6xl mx-auto px-4 py-12">
-        <!-- Header -->
-        <div class="mb-10">
-          <div class="flex items-center mb-6">
-            <div
-              class="bg-gradient-to-r from-yellow-900/40 to-blue-900/40 p-3 rounded-xl mr-4"
-            >
-              <i data-lucide="trophy" class="h-10 w-10 text-yellow-400"></i>
-            </div>
-            <div>
-              <h1 class="text-3xl font-bold text-white">
-                LEADERBOARD KINERJA SKPD / KANWIL
-              </h1>
-              <p class="text-gray-400">
-                Performance ranking of regional government agencies based on
-                media engagement and compliance metrics
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Leaderboard Table -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <!-- Top Performers -->
-          <div class="lg:col-span-2">
-            <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-              <i data-lucide="award" class="h-5 w-5 text-yellow-400 mr-2"></i>
-              Top 10 Performing Agencies
-            </h3>
-
+            <!-- Feed Content -->
             <div class="space-y-4">
-              <!-- Rank 1 (Already shown in header, but showing as first in list) -->
-              <div class="score-card score-excellent p-5">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div class="rank-badge rank-1 mr-4">1</div>
-                    <div>
-                      <h4 class="font-bold text-white">Dinas Pariwisata</h4>
-                      <div class="text-gray-400 text-sm mt-1">
-                        Tourism Department
-                      </div>
-                    </div>
+              <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="bg-blue-100 rounded-lg p-2">
+                    <i
+                      data-lucide="newspaper"
+                      class="h-5 w-5 text-blue-600"
+                    ></i>
                   </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-white mb-2">
-                      98 / 100
-                    </div>
-                    <div class="grade-badge grade-a-plus">A+</div>
-                  </div>
+                  <h5 class="font-semibold text-gray-900">Radar Jogja</h5>
+                  <span
+                    class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium"
+                    >SMSI Member</span
+                  >
                 </div>
+                <p class="text-gray-900 mb-2">
+                  Pembangunan Tol Jogja dihentikan sementara
+                </p>
+                <p class="text-sm text-gray-500">10:00 AM • Web News</p>
               </div>
 
-              <!-- Rank 2 -->
-              <div class="score-card score-high p-5">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div class="rank-badge rank-2 mr-4">2</div>
-                    <div>
-                      <h4 class="font-bold text-white">Bappeda</h4>
-                      <div class="text-gray-400 text-sm mt-1">
-                        Regional Development Planning Agency
-                      </div>
-                    </div>
+              <div
+                class="bg-orange-50 border border-orange-200 rounded-xl p-6 relative"
+              >
+                <div class="absolute top-4 right-4">
+                  <div
+                    class="bg-orange-600 text-white px-3 py-1 rounded-lg text-xs font-bold"
+                  >
+                    DETECTED
                   </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-white mb-2">
-                      92 / 100
-                    </div>
-                    <div class="grade-badge grade-excellent">Excellent</div>
-                  </div>
+                  <p class="text-xs text-orange-700 font-medium mt-1">
+                    Organic Complaint
+                  </p>
                 </div>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="bg-gray-200 rounded-full p-2">
+                    <i data-lucide="twitter" class="h-5 w-5 text-gray-600"></i>
+                  </div>
+                  <h5 class="font-semibold text-gray-900">@WargaLokal</h5>
+                </div>
+                <p class="text-gray-900 mb-2">
+                  Waduh, kok berhenti lagi? padahal macet udah parah banget nih.
+                  Pemerintah gimana sih
+                </p>
+                <p class="text-sm text-gray-500">10:15 AM • Social Media</p>
               </div>
 
-              <!-- Rank 3 -->
-              <div class="score-card p-5 border-l-4 border-purple-500">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div class="rank-badge rank-3 mr-4">3</div>
-                    <div>
-                      <h4 class="font-bold text-white">Dinas Pendidikan</h4>
-                      <div class="text-gray-400 text-sm mt-1">
-                        Education Department
-                      </div>
-                    </div>
+              <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="bg-gray-800 rounded-lg p-2">
+                    <i data-lucide="video" class="h-5 w-5 text-white"></i>
                   </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-white mb-2">
-                      89 / 100
-                    </div>
-                    <div class="performance-percentage percentage-medium">
-                      17.2%
-                    </div>
-                  </div>
+                  <h5 class="font-semibold text-gray-900">TikTok</h5>
                 </div>
-              </div>
-
-              <!-- Rank 4 -->
-              <div class="score-card p-5 border-l-4 border-blue-500">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div class="rank-badge bg-blue-600 text-white mr-4">4</div>
-                    <div>
-                      <h4 class="font-bold text-white">Dinas Kesehatan</h4>
-                      <div class="text-gray-400 text-sm mt-1">
-                        Health Department
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-white mb-2">
-                      87 / 100
-                    </div>
-                    <div class="performance-percentage percentage-medium">
-                      16.8%
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Rank 5 -->
-              <div class="score-card p-5 border-l-4 border-blue-400">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div class="rank-badge bg-blue-500 text-white mr-4">5</div>
-                    <div>
-                      <h4 class="font-bold text-white">Dinas Perhubungan</h4>
-                      <div class="text-gray-400 text-sm mt-1">
-                        Transportation Department
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-right">
-                    <div class="text-2xl font-bold text-white mb-2">
-                      85 / 100
-                    </div>
-                    <div class="performance-percentage percentage-medium">
-                      15.9%
-                    </div>
-                  </div>
-                </div>
+                <p class="text-gray-900 mb-2">
+                  Pov: Nunggu tol jadi be like...
+                </p>
+                <p class="text-sm text-gray-500">10:50 AM • Social Media</p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <!-- Attention Required & Sentiment -->
-          <div>
-            <!-- Attention Required -->
-            <div class="attention-required rounded-xl p-6 mb-8">
-              <h3 class="text-xl font-bold text-white mb-6 flex items-center">
-                <i
-                  data-lucide="alert-triangle"
-                  class="h-5 w-5 text-red-400 mr-2"
-                ></i>
-                ATTENTION REQUIRED (INACTIVE UNITS)
+      <!-- Narrative Compliance Audit -->
+      <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Narrative Compliance Audit
+            </h2>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8"
+          >
+            <div class="mb-8">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-gray-900">
+                  Campaign Monitor: Program Asta Cita (Priority)
+                </h3>
+              </div>
+              <div class="flex justify-between items-center mb-6">
+                <div>
+                  <p class="text-sm text-gray-600">Overall Status</p>
+                  <p class="text-sm font-semibold text-red-600">
+                    Deadline: 2 Days Left
+                  </p>
+                </div>
+                <div class="text-right">
+                  <p class="text-3xl font-bold text-green-600">87%</p>
+                  <p class="text-sm text-gray-600">Compliance Rate</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Compliant Units -->
+            <div class="mb-8">
+              <h3 class="text-lg font-bold text-gray-900 mb-4">
+                Compliant Units
               </h3>
-
-              <div class="score-card score-inactive p-5 mb-6">
-                <div class="flex items-center justify-between mb-4">
-                  <div class="flex items-center">
-                    <div class="rank-badge rank-low mr-4 pulse-alert">48</div>
-                    <div>
-                      <h4 class="font-bold text-white">Dinas Kebersihan</h4>
-                      <div class="text-gray-400 text-sm mt-1">
-                        Sanitation Department
-                      </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white border border-green-200 rounded-xl p-6">
+                  <div class="flex items-start gap-4">
+                    <div class="bg-green-100 rounded-lg p-3 flex-shrink-0">
+                      <i
+                        data-lucide="check-circle"
+                        class="h-6 w-6 text-green-600"
+                      ></i>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-gray-900 mb-1">
+                        Kanwil Kemenag Jatim
+                      </h4>
+                      <p class="text-sm text-green-600 font-medium mb-1">
+                        POSTED ✓
+                      </p>
+                      <p class="text-xs text-gray-500">2 Hours ago</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                      <img
+                        src="./kanwil-jateng.jpeg"
+                        alt="kanwil-jateng"
+                        class="w-32"
+                      />
                     </div>
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between mb-4">
-                  <div class="text-2xl font-bold text-red-400">24 / 100</div>
-                  <div class="performance-percentage percentage-low">3.1%</div>
+                <div class="bg-white border border-green-200 rounded-xl p-6">
+                  <div class="flex items-start gap-4">
+                    <div class="bg-green-100 rounded-lg p-3 flex-shrink-0">
+                      <i
+                        data-lucide="check-circle"
+                        class="h-6 w-6 text-green-600"
+                      ></i>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-gray-900 mb-1">
+                        UIN Sunan Kalijaga
+                      </h4>
+                      <p class="text-sm text-green-600 font-medium mb-1">
+                        POSTED ✓
+                      </p>
+                      <p class="text-xs text-gray-500">5 Hours ago</p>
+                    </div>
+                    <div class="flex items-center justify-center">
+                      <img
+                        src="./uin-kalijaga.jpg"
+                        alt="uin-kalijaga"
+                        class="w-32"
+                      />
+                    </div>
+                  </div>
                 </div>
-
-                <div class="grade-badge grade-inactive">INACTIVE</div>
               </div>
+            </div>
 
-              <div class="space-y-3">
-                <div class="flex items-center text-red-400">
-                  <i data-lucide="alert-circle" class="h-4 w-4 mr-2"></i>
-                  <span class="text-sm"
-                    >No media engagement in last 30 days</span
-                  >
+            <!-- Non-Compliant Units -->
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-4">
+                Non-Compliant Units
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                  <div class="flex items-start gap-4">
+                    <div class="bg-red-100 rounded-lg p-3 flex-shrink-0">
+                      <i
+                        data-lucide="x-circle"
+                        class="h-6 w-6 text-red-600"
+                      ></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">
+                        Kanwil Kemenag Papua
+                      </h4>
+                      <p class="text-sm text-red-600 font-medium">Missing ✗</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex items-center text-yellow-400">
-                  <i data-lucide="clock" class="h-4 w-4 mr-2"></i>
-                  <span class="text-sm"
-                    >Last compliance report: 45 days ago</span
-                  >
-                </div>
-                <div class="flex items-center text-blue-400">
-                  <i data-lucide="user" class="h-4 w-4 mr-2"></i>
-                  <span class="text-sm">Assigned to: Regional Supervisor</span>
+
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                  <div class="flex items-start gap-4">
+                    <div class="bg-red-100 rounded-lg p-3 flex-shrink-0">
+                      <i
+                        data-lucide="x-circle"
+                        class="h-6 w-6 text-red-600"
+                      ></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">
+                        UIN Sorong
+                      </h4>
+                      <p class="text-sm text-red-600 font-medium">Missing ✗</p>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <button
-                class="w-full mt-6 bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-medium flex items-center justify-center transition-colors"
+      <!-- Leaderboard Section -->
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="flex items-center justify-center gap-3 mb-12">
+            <i data-lucide="trophy" class="h-10 w-10 text-blue-600"></i>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+              Leaderboard Kinerja SKPD/Kanwil
+            </h2>
+          </div>
+
+          <!-- Top Performers -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-8 mb-8">
+            <div class="space-y-4">
+              <div
+                class="flex items-center justify-between bg-gradient-to-r from-yellow-50 to-white border border-yellow-200 rounded-xl p-6"
               >
-                <i data-lucide="message-square" class="h-4 w-4 mr-2"></i>
-                Escalate to Management
-              </button>
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-yellow-100 rounded-full w-12 h-12 flex items-center justify-center"
+                  >
+                    <span class="text-xl font-bold text-yellow-700">1</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">
+                    Dinas Pariwisata
+                  </h3>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="text-2xl font-bold text-gray-900">98/100</p>
+                  </div>
+                  <div
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold"
+                  >
+                    A+
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex items-center justify-between bg-gradient-to-r from-gray-50 to-white border border-gray-200 rounded-xl p-6"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-gray-200 rounded-full w-12 h-12 flex items-center justify-center"
+                  >
+                    <span class="text-xl font-bold text-gray-700">2</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">Bappeda</h3>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="text-2xl font-bold text-gray-900">92/100</p>
+                  </div>
+                  <div
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg font-bold"
+                  >
+                    A
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex items-center justify-between bg-gradient-to-r from-orange-50 to-white border border-orange-200 rounded-xl p-6"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-orange-100 rounded-full w-12 h-12 flex items-center justify-center"
+                  >
+                    <span class="text-xl font-bold text-orange-700">3</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">
+                    Dinas Kesehatan
+                  </h3>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="text-2xl font-bold text-gray-900">88/100</p>
+                  </div>
+                  <div
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold"
+                  >
+                    A-
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex items-center justify-between bg-white border border-gray-200 rounded-xl p-6"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-gray-100 rounded-full w-12 h-12 flex items-center justify-center"
+                  >
+                    <span class="text-xl font-bold text-gray-600">4</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">
+                    Dinas Pendidikan
+                  </h3>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="text-2xl font-bold text-gray-900">85/100</p>
+                  </div>
+                  <div
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold"
+                  >
+                    B+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attention Required -->
+          <div class="bg-red-50 border border-red-200 rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <i data-lucide="alert-triangle" class="h-6 w-6 text-red-600"></i>
+              <h3 class="text-xl font-bold text-gray-900">
+                Attention Required (Inactive Units)
+              </h3>
+            </div>
+            <div class="bg-white border border-red-300 rounded-xl p-6">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="bg-red-100 rounded-full w-12 h-12 flex items-center justify-center"
+                  >
+                    <span class="text-xl font-bold text-red-700">50</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900">
+                    Dinas Kebersihan
+                  </h3>
+                </div>
+                <div class="flex items-center gap-6">
+                  <div class="text-right">
+                    <p class="text-2xl font-bold text-gray-900">23/100</p>
+                  </div>
+                  <div
+                    class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold"
+                  >
+                    INACTIVE
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Activity Monitor Section -->
+      <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Activity Monitor: 540 Units
+            </h2>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-8"
+          >
+            <div class="mb-6">
+              <div
+                class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6"
+              >
+                <div class="flex items-center gap-3">
+                  <i
+                    data-lucide="alert-circle"
+                    class="h-5 w-5 text-orange-600"
+                  ></i>
+                  <p class="font-semibold text-orange-900">
+                    15 Units Inactive (>7 days)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-white border border-gray-200 rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="bg-green-100 rounded-lg p-3">
+                      <i
+                        data-lucide="building"
+                        class="h-6 w-6 text-green-600"
+                      ></i>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">
+                        Kemenag Kota Surabaya
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm font-semibold"
+                      >Active</span
+                    >
+                    <span class="text-sm text-gray-500">Posted 2h Ago</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="bg-red-100 rounded-lg p-3">
+                      <i
+                        data-lucide="building"
+                        class="h-6 w-6 text-red-600"
+                      ></i>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">
+                        Kemenag Kab. Merauke
+                      </p>
+                      <p class="text-sm text-red-600">Last Post: 21 Days Ago</p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-bold"
+                      >Inactive Alert</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white border border-gray-200 rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="bg-blue-100 rounded-lg p-3">
+                      <i
+                        data-lucide="building"
+                        class="h-6 w-6 text-blue-600"
+                      ></i>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-gray-900">
+                        Kemenag Kota Bandung
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span
+                      class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm font-semibold"
+                      >Active</span
+                    >
+                    <span class="text-sm text-gray-500">Posted 4h Ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Geo-Spatial Sentiment Heatmap -->
+      <section class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Geo-Spatial Sentiment Heatmap
+            </h2>
+            <p class="text-xl text-gray-600">
+              Visualisasi sentimen berdasarkan lokasi geografis
+            </p>
+          </div>
+          <div class="rounded-2xl">
+            <img src="./heatmap.jpeg" alt="heatmap" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Crisis Diffusion Radius -->
+      <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="text-center mb-12">
+            <span
+              class="inline-block bg-red-100 text-red-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-4"
+            >
+              Crisis Detection
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Crisis Diffusion Radius
+            </h2>
+            <p class="text-xl text-gray-600">
+              Pantau penyebaran isu kritis secara real-time
+            </p>
+          </div>
+          <div class="rounded-2xl">
+            <img src="./diffusion-radius.jpeg" alt="diffusion-radius" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white">
+      <div class="max-w-5xl mx-auto px-6 py-16">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12"
+        >
+          <div class="lg:col-span-2">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="bg-blue-600 rounded-lg p-1.5">
+                <i data-lucide="radar" class="h-5 w-5 text-white"></i>
+              </div>
+              <span class="text-xl font-semibold">Recommedia</span>
+            </div>
+            <p class="text-gray-400 leading-relaxed text-sm">
+              Recommedia adalah platform intelijen media yang memberikan analisa
+              strategis dan menyeluruh untuk pemerintah dan institusi nasional
+              di Indonesia.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Product</h4>
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Dashboard</a
+              >
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Leaderboard</a
+              >
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Geo Intel</a
+              >
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Company</h4>
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >About Us</a
+              >
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Careers</a
+              >
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Contact</a
+              >
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Resources</h4>
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Blog</a
+              >
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Help Center</a
+              >
+              <a
+                href="#"
+                class="block text-gray-400 hover:text-white transition-colors text-sm"
+                >Privacy Policy</a
+              >
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Contact</h4>
+            <div class="text-gray-400 text-sm space-y-2">
+              <p class="font-medium text-white">PT Recommedia Jaya</p>
+              <p>Jl. Kebon Sirih No. 17A</p>
+              <p>Jakarta Pusat 10340</p>
+              <p class="pt-2">support@recommedia.id</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 pt-8">
+          <div
+            class="flex flex-col md:flex-row justify-between items-center gap-4"
+          >
+            <p class="text-gray-400 text-sm">
+              © 2026 Recommedia. All Rights Reserved
+            </p>
+            <div class="flex gap-4">
+              <span
+                class="inline-flex items-center gap-2 text-gray-400 text-sm"
+              >
+                <i data-lucide="lock" class="h-4 w-4"></i>
+                Secure Site
+              </span>
+              <span
+                class="inline-flex items-center gap-2 text-gray-400 text-sm"
+              >
+                <i data-lucide="shield-check" class="h-4 w-4"></i>
+                ISO 27001 Certified
+              </span>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Footer -->
-      <footer class="mt-16 pt-12 border-t border-gray-800">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div class="md:col-span-2">
-            <div class="flex items-center mb-6">
-              <i data-lucide="radar" class="text-blue-400 h-8 w-8 mr-3"></i>
-              <h2 class="text-2xl font-bold text-white">Recommedia</h2>
-            </div>
-            <p class="text-gray-400 mb-6 max-w-md">
-              Advanced media intelligence platform providing strategic and
-              comprehensive analysis for government and national institutions in
-              Indonesia.
-            </p>
-            <div class="flex space-x-4">
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <i data-lucide="twitter" class="h-5 w-5"></i>
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <i data-lucide="linkedin" class="h-5 w-5"></i>
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <i data-lucide="facebook" class="h-5 w-5"></i>
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <h5 class="text-white font-bold mb-6">Contact Info</h5>
-            <div class="space-y-4">
-              <div class="flex items-start">
-                <i
-                  data-lucide="map-pin"
-                  class="h-5 w-5 text-blue-400 mr-3 mt-1"
-                ></i>
-                <div>
-                  <p class="text-gray-400">PT. Recommedia Jaya</p>
-                  <p class="text-gray-400">Jl. Kebon Sirih No. 17A</p>
-                  <p class="text-gray-400">Jakarta Pusat 10340</p>
-                </div>
-              </div>
-              <div class="flex items-center">
-                <i data-lucide="mail" class="h-5 w-5 text-blue-400 mr-3"></i>
-                <a
-                  href="mailto:support@recommedia.id"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >support@recommedia.id</a
-                >
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h5 class="text-white font-bold mb-6">Subscribe</h5>
-            <p class="text-gray-400 mb-4">
-              Get updates on new features and industry insights.
-            </p>
-            <div class="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                class="flex-1 bg-gray-900 border border-gray-700 rounded-l-lg px-4 py-2 text-white focus:outline-none"
-              />
-              <button
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-r-lg transition-colors"
-              >
-                <i data-lucide="send" class="h-4 w-4"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-divider my-8"></div>
-
-        <div
-          class="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm"
-        >
-          <p>© 2023 Recommedia. All rights reserved.</p>
-          <div class="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" class="hover:text-gray-300 transition-colors"
-              >Privacy Policy</a
-            >
-            <a href="#" class="hover:text-gray-300 transition-colors"
-              >Terms of Service</a
-            >
-            <a href="#" class="hover:text-gray-300 transition-colors"
-              >Cookie Policy</a
-            >
-          </div>
-        </div>
-      </footer>
-    </div>
+    </footer>
 
     <script>
-      // Initialize Lucide Icons
       lucide.createIcons();
-
-      // Form submission handler
-      document.querySelector("form").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        // Get form values
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-
-        if (name && email) {
-          // In a real application, you would send this data to a server
-          alert(
-            `Thank you ${name}! We'll contact you at ${email} to schedule your demo.`,
-          );
-          document.querySelector("form").reset();
-        } else {
-          alert("Please fill in all required fields.");
-        }
-      });
-
-      // Add hover effect to product cards
-      document.querySelectorAll(".product-card").forEach((card) => {
-        card.addEventListener("mouseenter", function () {
-          const icon = this.querySelector("[data-lucide]");
-          if (icon) {
-            icon.setAttribute("data-lucide", "arrow-right");
-            lucide.createIcons();
-          }
-        });
-
-        card.addEventListener("mouseleave", function () {
-          const icon = this.querySelector("[data-lucide]");
-          if (icon && icon.getAttribute("data-lucide") === "arrow-right") {
-            icon.setAttribute("data-lucide", "chevron-right");
-            lucide.createIcons();
-          }
-        });
-      });
-
-      // Initialize Lucide Icons
-      lucide.createIcons();
-
-      // Simulate live updates
-      let updateCount = 0;
-
-      function simulateLiveUpdate() {
-        updateCount++;
-        const updateTime = document.querySelector(
-          ".flex.items-center.text-gray-400.text-sm span",
-        );
-        if (updateTime) {
-          updateTime.textContent = `Updated ${updateCount} second${updateCount !== 1 ? "s" : ""} ago`;
-        }
-
-        // Randomly highlight a map location
-        const mapLocations = document.querySelectorAll(".map-location");
-        if (mapLocations.length > 0) {
-          mapLocations.forEach((loc) => loc.classList.remove("active"));
-          const randomIndex = Math.floor(Math.random() * mapLocations.length);
-          mapLocations[randomIndex].classList.add("active");
-        }
-      }
-
-      // Start simulation
-      setInterval(simulateLiveUpdate, 5000);
-
-      // Add click functionality to news cards
-      document.querySelectorAll(".news-card").forEach((card) => {
-        card.addEventListener("click", function () {
-          const title = this.querySelector("h4").textContent;
-          alert(`Opening detailed view for: ${title}`);
-        });
-      });
-
-      // Add click functionality to incoming news items
-      document.querySelectorAll(".incoming-news-item").forEach((item) => {
-        item.addEventListener("click", function () {
-          const location = this.querySelector(".location-tag").textContent;
-          const text = this.querySelector("p").textContent;
-          alert(`[${location}] ${text}`);
-        });
-      });
-    </script>
-
-    <script>
-      // Initialize Lucide Icons
-      lucide.createIcons();
-
-      // Simulate live typing effect for the last post
-      const typingText =
-        "12 mm mungkin ada masalah sistem atau kurang staff ya?";
-      let charIndex = 0;
-      const typingElement = document.querySelector(
-        ".text-gray-400.italic span",
-      );
-
-      function typeText() {
-        if (charIndex < typingText.length) {
-          if (typingElement) {
-            typingElement.textContent = typingText.substring(0, charIndex + 1);
-            charIndex++;
-            setTimeout(typeText, 50);
-          }
-        }
-      }
-
-      // Start typing after 2 seconds
-      setTimeout(() => {
-        const typingIndicator = document.querySelector(".typing-indicator");
-        if (typingIndicator) {
-          typingIndicator.style.display = "none";
-        }
-
-        // Add typing animation
-        if (typingElement) {
-          typingElement.textContent = "";
-          typeText();
-        }
-      }, 2000);
-
-      // Add click functionality to posts
-      document.querySelectorAll(".social-post").forEach((post) => {
-        post.addEventListener("click", function () {
-          const usernameElement = this.querySelector(
-            ".username-badge, .anonymous-badge",
-          );
-          const username = usernameElement
-            ? usernameElement.textContent
-            : "Unknown";
-
-          const detectionBadge = this.querySelector(".detection-badge");
-          if (detectionBadge) {
-            alert(
-              `Opening detailed analysis for ${username} - ${detectionBadge.textContent.trim()}`,
-            );
-          } else {
-            alert(`Opening post by ${username}`);
-          }
-        });
-      });
-
-      // Animate the confidence score
-      const confidenceElement = document.querySelector(
-        ".bg-green-900\\/20 span",
-      );
-      if (
-        confidenceElement &&
-        confidenceElement.textContent.includes("Confidence:")
-      ) {
-        let score = 0;
-        const targetScore = 92;
-        const interval = setInterval(() => {
-          if (score < targetScore) {
-            score += 1;
-            confidenceElement.textContent = `Confidence: ${score}%`;
-          } else {
-            clearInterval(interval);
-          }
-        }, 30);
-      }
-    </script>
-
-    <script>
-      // Initialize Lucide Icons
-      lucide.createIcons();
-
-      // Simulate countdown timer
-      const countdownElement = document.querySelector(
-        ".deadline-countdown span",
-      );
-      let daysLeft = 2;
-
-      function updateCountdown() {
-        if (countdownElement) {
-          countdownElement.innerHTML = `<span class="ml-2">${daysLeft} Days Left</span>`;
-
-          // Add pulse animation when 1 day or less
-          if (daysLeft <= 1) {
-            countdownElement
-              .closest(".deadline-countdown")
-              .classList.add("pulse-animation");
-          }
-        }
-      }
-
-      // Simulate sending reminder
-      document.querySelectorAll(".reminder-btn").forEach((button) => {
-        button.addEventListener("click", function (e) {
-          e.stopPropagation(); // Prevent event bubbling
-
-          const unitCard = this.closest(".unit-card");
-          const unitName = unitCard.querySelector("h4").textContent;
-
-          // Show sending state
-          const originalText = this.innerHTML;
-          this.innerHTML =
-            '<i data-lucide="loader" class="h-3 w-3 mr-2 animate-spin"></i>SENDING...';
-          this.disabled = true;
-
-          // Simulate API call
-          setTimeout(() => {
-            this.innerHTML =
-              '<i data-lucide="check" class="h-3 w-3 mr-2"></i>SENT ✓';
-            this.classList.remove("reminder-btn");
-            this.classList.add("bg-green-600", "text-white");
-
-            // Show notification
-            alert(`Reminder sent to ${unitName}`);
-
-            // Reset after 3 seconds
-            setTimeout(() => {
-              this.innerHTML = originalText;
-              this.classList.add("reminder-btn");
-              this.classList.remove("bg-green-600", "text-white");
-              this.disabled = false;
-            }, 3000);
-          }, 1500);
-        });
-      });
-
-      // Add click functionality to unit cards
-      document.querySelectorAll(".unit-card").forEach((card) => {
-        card.addEventListener("click", function () {
-          const unitName = this.querySelector("h4").textContent;
-          const status = this.querySelector(
-            ".status-badge-compliant, .status-badge-noncompliant",
-          ).textContent.trim();
-
-          alert(`Opening detailed report for ${unitName} - Status: ${status}`);
-        });
-      });
-
-      // Animate progress bars on load
-      document.addEventListener("DOMContentLoaded", function () {
-        const progressBars = document.querySelectorAll(".progress-fill");
-        progressBars.forEach((bar) => {
-          const originalWidth = bar.style.width;
-          bar.style.width = "0%";
-
-          setTimeout(() => {
-            bar.style.width = originalWidth;
-          }, 300);
-        });
-      });
-
-      // Simulate real-time updates
-      setInterval(() => {
-        // Randomly update compliance percentage
-        const complianceElement = document.querySelector(
-          ".bg-green-900\\/20 .text-2xl",
-        );
-        if (complianceElement) {
-          const current = parseInt(complianceElement.textContent);
-          const change = Math.random() > 0.5 ? 1 : -1;
-          const newValue = Math.max(0, Math.min(8, current + change));
-          complianceElement.textContent = newValue;
-
-          // Update overall progress
-          const overallProgress = document.querySelector(".progress-fill");
-          if (overallProgress) {
-            const newPercentage = Math.round((newValue / 8) * 100);
-            overallProgress.style.width = `${newPercentage}%`;
-          }
-        }
-      }, 10000);
-    </script>
-
-    <script>
-      // Initialize Lucide Icons
-      lucide.createIcons();
-
-      // Animate progress circles
-      document.addEventListener("DOMContentLoaded", function () {
-        const progressCircles = document.querySelectorAll(".circle-progress");
-        progressCircles.forEach((circle) => {
-          const score = parseInt(
-            circle.closest(".progress-circle").querySelector("span")
-              .textContent,
-          );
-          const circumference = 2 * Math.PI * 27;
-          const offset = circumference - (score / 100) * circumference;
-
-          circle.style.strokeDasharray = circumference;
-          circle.style.strokeDashoffset = circumference;
-
-          setTimeout(() => {
-            circle.style.strokeDashoffset = offset;
-          }, 300);
-        });
-
-        // Animate sentiment bars
-        const sentimentBars = document.querySelectorAll(".sentiment-fill");
-        sentimentBars.forEach((bar) => {
-          const originalWidth = bar.style.width;
-          bar.style.width = "0%";
-
-          setTimeout(() => {
-            bar.style.width = originalWidth;
-          }, 500);
-        });
-      });
-
-      // Add click functionality to score cards
-      document.querySelectorAll(".score-card").forEach((card) => {
-        card.addEventListener("click", function () {
-          const agencyName = this.querySelector("h3, h4").textContent;
-          const scoreElement = this.querySelector(".text-2xl");
-          const score = scoreElement ? scoreElement.textContent : "N/A";
-
-          alert(
-            `Opening detailed performance report for ${agencyName} - Score: ${score}`,
-          );
-        });
-      });
-
-      // Escalate button functionality
-      const escalateButton = document.querySelector("button.bg-red-600");
-      if (escalateButton) {
-        escalateButton.addEventListener("click", function () {
-          // Show loading state
-          const originalText = this.innerHTML;
-          this.innerHTML =
-            '<i data-lucide="loader" class="h-4 w-4 mr-2 animate-spin"></i>ESCALATING...';
-          this.disabled = true;
-
-          // Simulate API call
-          setTimeout(() => {
-            this.innerHTML =
-              '<i data-lucide="check" class="h-4 w-4 mr-2"></i>ESCALATED ✓';
-            this.classList.remove("bg-red-600", "hover:bg-red-700");
-            this.classList.add("bg-green-600", "hover:bg-green-700");
-
-            // Show notification
-            alert(
-              "Issue with Dinas Kebersihan has been escalated to regional management.",
-            );
-
-            // Reset after 3 seconds
-            setTimeout(() => {
-              this.innerHTML = originalText;
-              this.classList.add("bg-red-600", "hover:bg-red-700");
-              this.classList.remove("bg-green-600", "hover:bg-green-700");
-              this.disabled = false;
-            }, 3000);
-          }, 1500);
-        });
-      }
-
-      // Simulate real-time updates
-      let currentScore = 98;
-
-      function updateTopScore() {
-        const scoreElement = document.querySelector(
-          ".leaderboard-header .text-3xl.font-bold",
-        );
-        if (scoreElement && scoreElement.textContent.includes("98")) {
-          // Randomly fluctuate score between 96-100
-          const change = Math.random() > 0.5 ? 1 : -1;
-          currentScore = Math.max(96, Math.min(100, currentScore + change));
-
-          scoreElement.textContent = `${currentScore} / 100`;
-
-          // Update progress circle
-          const progressCircle = document.querySelector(
-            ".circle-progress.progress-high",
-          );
-          if (progressCircle) {
-            const circumference = 2 * Math.PI * 27;
-            const offset = circumference - (currentScore / 100) * circumference;
-            progressCircle.style.strokeDashoffset = offset;
-          }
-
-          // Update percentage display
-          const percentageDisplay = document.querySelector(
-            ".progress-circle .text-xl",
-          );
-          if (percentageDisplay) {
-            percentageDisplay.textContent = `${currentScore}%`;
-          }
-        }
-      }
-
-      // Update score every 10 seconds
-      setInterval(updateTopScore, 10000);
-
-      // Add pulse animation to inactive unit badge
-      const inactiveBadge = document.querySelector(".rank-low.pulse-alert");
-      if (inactiveBadge) {
-        setInterval(() => {
-          inactiveBadge.classList.toggle("pulse-alert");
-          setTimeout(() => {
-            inactiveBadge.classList.toggle("pulse-alert");
-          }, 500);
-        }, 4000);
-      }
     </script>
   </body>
 </html>
